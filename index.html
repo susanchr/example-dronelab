@@ -1,0 +1,2248 @@
+<html lang="en">
+ <head>
+  <meta charset="UTF-8" />
+  <title>GSC Drone Lab 1 - Instructions</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&family=IBM+Plex+Sans+Condensed:ital@0;1&family=IBM+Plex+Sans:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&family=IBM+Plex+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ </head>
+
+ <body>
+  <a id="top"></a>
+  <div id="navbar">
+   <span class="start" onClick="toggleOptions()">GSC Drone Lab 1</span>
+   <span id="nb" class="item" onClick="moveTo('begin')" style="background-color: #217b6d;">Begin Lab</span>
+   <span id="np" class="item" onClick="moveTo('prelim')" >Preliminary Steps</span>
+   <span id="n1" class="item" onClick="moveTo('s1')">Step 1</span>
+   <span id="n2" class="item" onClick="moveTo('s2')">Step 2</span>
+   <span id="n3" class="item" onClick="moveTo('s3')">Step 3</span>
+   <span id="n4" class="item" onClick="moveTo('s4')">Step 4</span>
+   <span id="n5" class="item" onClick="moveTo('s5')">Step 5</span>
+   <span id="ns" class="item" onClick="moveTo('sum')">Summary</span>
+   <a
+    href="https://ibm.enterprise.slack.com/?redir=%2Fr-t75413889568%3Fredir%3D%252Fgantry%252Fauth%253Fapp%253Dclient%2526lc%253D1592853172%2526return_to%253D%25252Fclient%25252FT27C5S5GQ%25252FC015DBZ9YH0%2526teams%253D#/"
+    target="_blank"
+   >
+    <span class="out item"> <img src="./img/slack.png" /> Lab Slack channel - post questions & more ⇒</span>
+   </a>
+  </div>
+  <div id="optionsMenu"><span class="opt" id="highlightedUpdates2" onClick="updates2()">[Highlight 7/14/2020 Updates]</span> <span class="opt" id="highlightedUpdates" onClick="updates()">[6/30/2020]</span> <span id="keepTop" onClick="keepTop()">Keep at top</span></div>
+  <div id="full">
+   <!--- Begin Lab -->
+   <div id="beginlab" class="main" style="display:block;">
+    <div class="block">
+     <div class="leftHalf">
+      <h1>GSC Drone Lab 1: Introduction</h1>
+      <span class="readTime UPDATE">&#9200; Length: 3 minutes, 35 seconds (~730 words)</span>
+      <p>
+       This lab is the <b>first</b> in a series of labs designed to demonstrate how several IBM technologies, such as <span class="blue">OpenShift (Kubernetes), Hybrid Multicloud, and CP4i (API Connect)</span> can be utilized along with
+       modern industry devices, such as <span class="darkblue">drones</span> and <span class="darkblue">sensors</span>, in various industry-specific applications.
+      </p>
+
+      <p>
+       With much to cover, it’s imperative that you start out by <b>learning about your environment</b> and <b>get comfortable</b> with the environment’s interface <b>configuration</b>. You don’t need to be a technically-skilled expert to
+       customize or even deploy your first application to a multi-hybrid cloud – follow these instructions carefully and you’ll be able to do just that!
+      </p>
+
+      <p>
+       As a lab participant, you will have the opportunity to review and <b>change configuration</b> in an application thereby making it <span class="magenta">unique</span> to you, access RedHat OpenShift through IBM Cloud, use a
+       <b>Dockerfile</b> to connect your unique application’s code repository on <b>GitHub</b> to an <b>OpenShift</b> instance, and even get to play around with your new application as well.
+      </p>
+
+      <p>The diagram on the right depicts a high-level flow and services used in this lab.</p>
+
+      <h2>Lab Overview</h2>
+
+      <p>
+       At the core of this lab, you will deploy a web application (just like most sites you’d access online) to a hybrid multi-cloud. As an example, you will use a prepared <b>remote drone operations console</b> as your web application,
+       which you’ll be able to add your own custom and unique configuration.
+      </p>
+
+      <p>
+       Drones are quickly growing in popularity, both in commercial and industry usage. In this lab, you’ll experience firsthand some cross-industry examples of drone technology being put to task at
+       <b>saving lives</b> and <b>helping populations</b>.
+      </p>
+
+      <p>
+       While you will not be writing the code for your remote drone application, you will gain some <b>insight</b> on the <b>process</b>, and even make <b>small code changes</b> in <b>GitHub Enterprise</b> that will render your application
+       unique.
+      </p>
+
+      <p>
+       You will then deploy your remote drone application on <b>OpenShift</b>, an <b>open source application platform</b> based on Kubernetes and container technology that focuses on making the
+       <b>Kubernetes</b> experience easier for developers and operations teams. With a menu driven interface, users can create a highly available and managed OpenShift cluster, along with industry-leading developer experience, automated provisioning, updates, and patching.
+      </p>
+
+      <p>
+       Along the way, you will learn about the IBM Hybrid Multicloud <b>Sandbox as a Service (SBaaS)</b> platform which provides cloud services to enable our technical sellers to gain experience with IBM Cloud capabilities along with other
+       industry Cloud platforms in a hands-on environment. Pre-packaged scenarios and technologies can be customized to build client specific PoCs/prototypes and show the value of IBM Cloud and Industry solutions to help clients with their
+       cloud and digital transformation journeys.
+      </p>
+     </div>
+     <div class="rightHalf">
+      <div class="tableofcontents">
+       <span class="magenta">Table of Contents</span>
+       <br />
+       <br />
+       Before you begin <br />
+       1. Using GitHub to Access/Modify an Application <br />
+       2. Accessing RedHat OpenShift through IBM Cloud <br />
+       3. Creating Application in OpenShift from GitHub <br />
+       4. Building and Verifying Application on OpenShift <br />
+       5. Exploring the Application <br />
+       Summary & Contacts
+      </div>
+      <img class="sideImage" src="./img/diagram.png" />
+      <br />
+      <a href="./img/diagram.png" target="_blank">View full size diagram</a>
+     </div>
+    </div>
+    <div class="block">
+     <div class="leftHalf">
+      <h2>What steps were done for each lab user as setup?</h2>
+
+      <p>
+       When you made a request to take this hands-on lab, there were some background tasks that were performed on your behalf in order to prepare the GitHub and Sandbox as a Service (SBaaS) environments with the appropriate permissions,
+       configuration, and content. Using the <span class="tblue">GitHub Collaborator API, IBM Cloud CLI, and OpenShift CLI</span>, the following tasks were completed for each new lab user:
+      </p>
+
+      <p>
+       <b>Setting up the GitHub Repository for the user</b>
+       <br />
+       A <span class="tblue">clone</span> was created from the original GitHub repository where the remote drone console application was developed, and reuploaded to a new unique space for a given lab user. That user was then added to their unique GitHub repository as a <span class="tblue">collaborator</span>.
+      </p>
+
+      <p>
+       <b>Adding the user to the SBaaS environment</b>
+       <br />
+       The new user was first given <span class="tblue">user permissions</span> to the existing <span class="tblue">IBM Cloud organization</span> for the <span class="tblue">SBaaS environment</span> that was provisioned for the lab. A new
+       <span class="tblue">project</span> was then created specifically for that user in the <span class="tblue">OpenShift cluster</span> within that organization, and <span class="tblue">user policies</span> applied to enable the rights
+       necessary for completion of the lab steps.
+      </p>
+
+      <p>
+       <b>Build/Deploy an instance of the application</b>
+       <br />
+       From within OpenShift, the remote drone application code was then <span class="tblue">pulled</span> from the <span class="tblue">GitHub</span> repository to <span class="tblue">build a container image</span> from the <span class="tblue">Dockerfile</span>. That container image was then pushed to the appropriate <span class="tblue">namespace</span> in the OpenShift Container Registry running on IBM Cloud in this SBaaS environment to deploy the application. This initial application instance was deployed as a reference/example, but each lab user will create and customize a second application instance as part of the lab activities that follow.
+      </p>
+     </div>
+     <div class="rightHalf">
+      <img class="sideImage_sm" src="./img/steps1.png" />
+      <br />
+      <img class="sideImage_sm" src="./img/steps2.png" />
+     </div>
+    </div>
+    <div class="nextStepBar" onClick="moveTo('prelim')">
+        Move on to the Preliminary Steps →
+    </div>
+   </div>
+   <!--- Preliminary Steps -->
+   <div id="prelim" class="main">
+        <div class="block">
+        <div class="leftHalf">
+        <div class="slackInfo">
+        <h2>
+            <a name="slack">Slack Communication</a>
+        </h2>
+
+        <p>
+            Communication (such as feedback, questions, comments, and help) is done through a Slack channel dedicated to this lab. Before you begin the lab, it is encouraged that you confirm you have access to the channel
+            <span class="purple">#2020gsc_ibmcloudsandbox_dronelab1</span>, located in the <b>IBM Sales</b> workspace.
+        </p>
+        <p>
+            Go to
+            <span class="blue">
+            <a
+            href="https://ibm.enterprise.slack.com/?redir=%2Fr-t75413889568%3Fredir%3D%252Fgantry%252Fauth%253Fapp%253Dclient%2526lc%253D1592853172%2526return_to%253D%25252Fclient%25252FT27C5S5GQ%25252FC015DBZ9YH0%2526teams%253D#/"
+            target="_blank"
+            >
+            https://app.slack.com/client/T27C5S5GQ/C015DBZ9YH0
+            </a>
+            </span>
+            to verify you have access to this channel.
+        </p>
+        </div>
+        </div>
+        <div class="qHalf">
+        <div class="question">
+        👈 When I click that link, I do not see a Slack channel.
+        <span class="readmore">[Click to Read Solution]</span>
+        </div>
+        <div class="answer">
+        You will encounter issues if you do not have access to the
+        <b>IBM Sales workspace</b>. Go to <a href="https://ibm-sales.slack.com" target="_blank">https://ibm-sales.slack.com</a> - if you do not see a Slack channel at all, you may need to go
+        <a href="https://ibm.enterprise.slack.com/signin/find-workspaces" target="_blank">https://ibm.enterprise.slack.com/signin/find-workspaces</a> and search for <b>“IBM Sales”</b>. This workspace has over 34,000 members and has a
+        handshake icon with a blue background. Join this workspace and you will be granted access.
+        <b>You may need to scroll down several times to find it.</b>
+        <br />
+        Once you click to join the IBM Sales workspace, try visiting <a href="https://app.slack.com/client/T27C5S5GQ/C015DBZ9YH0" target="_blank">https://app.slack.com/client/T27C5S5GQ/C015DBZ9YH0</a> again.
+        </div>
+        </div>
+        </div>
+
+
+
+
+
+        <div id="newPrelim">
+            <div id="preliminary">
+                <h1> Lab Preliminary Steps </h1>
+
+                <b>What is your IBM email?</b> (You must provide this information before starting the lab.)<br /><br />
+                <input id="labnameVal" /> @ <input id="emailVal" placeholder="us.ibm.com" />
+                <input id="done" type="button" value="submit" onclick="setLabName()" />
+                <div id="confirmText"></div>
+            </div>
+
+            <div id="windowExample">
+                <div class="browserExample">
+                    In your browser window, <b>close all other tabs but this one.</b> <br/><br/> 
+                    Using the mock window below as reference,
+                    <br/><b>click on each of its 3 tabs</b> and read each description. <br/><br/> Then, <b>match your browser window</b> with the mock window.</div>
+                
+                <div>
+                    <br/> <i>As you go through the lab, you'll open 2 new tabs: Topology view in OpenShift, and your Remote Drone Console Application that you will view at the end of the lab.</i></div>
+                <div id="mainContainer">
+                <div id="horizontalTabs">
+                    <div class="tabs">
+                    <div class="tabs__list">
+                        <div class="buttons">
+                        <div class="yosemite">
+                            <div class="dot red"></div>
+                            <div class="dot amber"></div>
+                            <div class="dot green"></div>
+                        </div>
+                        </div>
+                        <div class="tab active" onClick="tabsDisplayURL('instructions')">
+                        <div class="tab__label">GSC Drone Lab 1 - Instructions </div>
+                        </div>
+                        <div class="tab" onClick="tabsDisplayURL('github')">
+                        <div class="tab__label">GSC-2020-lab-1/<span class="labnameHere UPDATE">YourLabName</span>-2020-lab: Repo for the GSC 2020 Lab 1 [GitHub]</div>
+                        </div>
+                        <div class="tab" onClick="tabsDisplayURL('cloud')">
+                        <div class="tab__label">IBM Cloud [later, cluster overview]</div>
+                        </div>
+                        <!--<div class="tab" onClick="tabsDisplayURL('openshift')">
+                        <div class="tab__label">Topology [RedHat OpenShift]</div>
+                        </div>
+                        <div class="tab" onClick="tabsDisplayURL('app')">
+                        <div class="tab__label">Remote Drone Console App</div>
+                        </div>-->
+                    </div>
+                    <div class="tabs__display-area">
+                        <div id="tabs_url">
+                        <a href="https://pages.github.ibm.com/dallas-gsc-gov/dronelab/" target="_blank">https://pages.github.ibm.com/dallas-gsc-gov/dronelab/</a>
+                        </div>
+                        <div id="tabs_description">
+                        - This current tab.<br/>
+                        - <b>Your browser should only have this tab open right now.</b><br/>
+                            - During the lab, you'll be clicking back to this tab often!<br/>
+                        - Now click on the [GitHub] tab to the right.
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="browserExampleSecond">Does your window match the mock window above with the 3 tabs? <br/> Besides this instructions tab being the left-most tab, the order of the tabs is <b>not important</b>. These 3 tabs will start off your lab correctly.</div>
+                        <p>
+                        <b>You should have received an email</b> <i>(“Thank you for your interest in the IBM Sandbox as a Service Hands—on Lab1: OpenShift Drone Application…”)</i> containing the <b>link to your repository</b>: 
+                        <span class="blue UPDATE"><a class="LABUSER_GIT_LINK" href="https://github.ibm.com/GSC-2020-lab-1/YourLabName-2020-lab" target="_blank">
+    https://github.ibm.com/GSC-2020-lab-1/YourLabName-2020-lab/</a></span>
+                        </p>
+
+                        <div>
+                        <p>The repository that you have been provided contains a link to the instructions you see here.</p>
+                        <p>
+                            <span class="green">The instructions here will guide you through the lab step by step.</span>
+                        </p>
+                        <p>
+                            <b>Note</b>:
+                            <span class="inote">
+                            In case you have already accessed your repository <b>without</b> the email link, you will still be able to use these instructions to follow the lab. <span class="UPDATE">If you have not received an email and you do <b>not</b> see a new repository in
+                            your IBM GitHub account, please post "I haven't recieved an email and do not see a new GitHub repository in my account" in the <b>#2020gsc_ibmcloudsandbox_dronelab1</b> Slack channel.</span>
+                            </span>
+                        </p>
+                        </div>
+                        
+                        <div class="timeline">
+                        <table>
+                            <tbody>
+                            <tr>
+                            <td class="step next">
+                            <div class="title">Step 1 <b>Next</b></div><br />
+                            ☑ Access GitHub Enterprise <br />
+                            ☑ Review the drone application repository <br />
+                            ☑ Make a configuration change <br />
+                            ☑ Commit change to the master branch <br />
+                            </td>
+                            <td class="arrow">→</td>
+                            <td class="step">
+                            <div class="title">Step 2</div><br />
+                            ☑ Access IBM Cloud<br />
+                            ☑ Access RedHat OpenShift cluster <br />
+                            ☑ Open RedHat OpenShift web console <br />
+                            ☑ Explore OpenShift web console <br />
+                            </td>
+                            <td class="arrow">→</td>
+                            <td class="step">
+                            <div class="title">Step 3</div><br />
+                            ☑ Add an application to OpenShift <br />
+                            ☑ Link OpenShift to GitHub repository <br />
+                            ☑ Generate token and create application <br />
+                            </td>
+                            <td class="arrow">→</td>
+                            <td class="step">
+                            <div class="title">Step 4</div><br />
+                            ☑ Explore topology<br />
+                            ☑ Check build status<br />
+                            ☑ Access deployed application<br />
+                            </td>
+                            <td class="arrow">→</td>
+                            <td class="step">
+                            <div class="title">Step 5</div><br/>
+                            ☑ Explore user interface<br />
+                            ☑ Consider industry use cases<br />
+                            </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                        <div class="nextStepBar" onClick="moveTo('s1')">
+                            Ready? Move on to Step 1 and start the lab →
+                        </div>
+
+            </div>
+
+        </div>
+
+   </div>
+   <!--- Begin Step 1 -->
+   <div id="step1" class="main">
+    <div id="menu">
+     <a href="#step1" class="start">Step 1</a>
+     <a href="#1_1">1.1 Access GitHub Enterprise</a>
+     <a href="#1_2">1.2 Review the drone application repository</a>
+     <a href="#1_3">1.3 Make a configuration change</a>
+     <a href="#1_4">1.4 Commit change to the master branch</a>
+     <a href="#finishStep1" class="end">Finish Step 1</a>
+    </div>
+    <div id="content">
+     <div id="main">
+      
+      <div id="sec_step1">
+       <h1>
+        <a name="step1">Step 1: Using GitHub to Access/Modify an Application</a>
+       </h1>
+       <p>
+        In this section, you will navigate to GitHub Enterprise and access the code for your application. IBM has GitHub Enterprise which provides the <b>social coding experience</b> that developers love. In most development environments,
+        there’s a lot of collaboration involved regarding code and changes to code. Enabling a team of developers to manage these changes and subsequent versions requires some form of source control, or git. <br />
+        In this lab, you will gain some <b>insight on the process</b>, and even make <b>small code changes</b> that will render your application unique.
+       </p>
+       <p>Reference:</p>
+       <div class="whole">
+        <div class="ref instructionRect">
+         <div class="in">
+          <span class="title">Instruction/Step</span>
+          <br />
+          <span class="UPDATE">Indicated as</span> text with light blue background.
+          <br />
+          <br />
+          <i>Example:</i>
+          <br />
+          <div class="step">Scroll down after you make your changes</div>
+         </div>
+        </div>
+        <div class="ref reminderRect">
+         <div class="in UPDATE">
+          <span class="remindertitle">Reminder</span>
+          <br />
+          It's important to read each step carefully and in order. <br/> <br/> 
+          Skipping sections, reading too fast, or not clicking to read <br/><div class="ex_question">💡 <b>More Information</b> lightbulb blocks</div>
+          <br/> may result in incomplete learning.
+         </div>
+        </div>
+       </div>
+       <br />
+       <br />
+       <div class="whole">
+        <div class="rect blueRect">
+         <div class="in">
+          Technologies Used
+          <br />
+          <img src="./img/github.png" />
+         </div>
+        </div>
+
+        <div class="rect magentaRect">
+         <div class="in">
+          Your Tasks for Step 1 <br /><br />
+          <div class="list">
+           ✅ Access GitHub Enterprise <br />
+           ✅ Review the drone application repository <br />
+           ✅ Make a configuration change <br />
+           ✅ Commit change to the master branch <br />
+          </div>
+         </div>
+        </div>
+       </div>
+       <br />
+       <br />
+       <div class="timeline">
+        <table>
+         <tbody>
+          <tr>
+           <td class="step inprogress">
+            <div class="title">Step 1 <b>In Progress</b></div><br />
+            ☑ Access GitHub Enterprise <br />
+            ☑ Review the drone application repository <br />
+            ☑ Make a configuration change <br />
+            ☑ Commit change to the master branch <br />
+           </td>
+           <td class="arrow">→</td>
+           <td class="step">
+            <div class="title">Step 2</div><br />
+            ☑ Access IBM Cloud<br />
+            ☑ Access RedHat OpenShift cluster <br />
+            ☑ Open RedHat OpenShift web console <br />
+            ☑ Explore OpenShift web console <br />
+           </td>
+           <td class="arrow">→</td>
+           <td class="step">
+            <div class="title">Step 3</div><br />
+            ☑ Add an application to OpenShift <br />
+            ☑ Link OpenShift to GitHub repository <br />
+            ☑ Generate token and create application <br />
+           </td>
+           <td class="arrow">→</td>
+           <td class="step">
+            <div class="title">Step 4</div><br />
+            ☑ Explore topology<br />
+            ☑ Check build status<br />
+            ☑ Access deployed application<br />
+           </td>
+           <td class="arrow">→</td>
+           <td class="step">
+            <div class="title">Step 5</div><br/>
+            ☑ Explore user interface<br />
+            ☑ Consider industry use cases<br />
+           </td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+       <br />
+      </div>
+
+      <!-- 1.1 -->
+      <div id="sec_1_1">
+       <h2>
+        <a name="1_1">1.1 Access GitHub Enterprise</a>
+       </h2>
+
+       <div class="sectionTitle">1.1.1</div>
+       <p>
+        The use of GitHub in this project is important because it allows developers to <b>track code changes</b> and <b>version deployments</b> across the entire project. From specific features to full production releases, GitHub can be
+        used for change and management control.
+       </p>
+       <div class="question">
+        💡 How is <b>GitHub Enterprise</b> different from <b>GitHub.com</b>?
+        <span class="readmore">[Click to Read More]</span>
+       </div>
+       <div class="answer">
+        GitHub Enterprise includes the same great set of features as GitHub.com but packaged for running on IBM’s network. All repository data is stored on machines that you control, and access is integrated with IBM’s authentication system
+        (SAML). GitHub Enterprise also includes support for pre-receive hooks, a powerful tool that can help you enforce critical business rules, meet compliance requirements and help prevent other undesired changes from ever being made.
+        Use GitHub Enterprise when you need complete control over repository and project information. Visit
+        <a href="https://enterprise.github.com/faq" target="_blank">https://enterprise.github.com/faq</a> to learn more.
+       </div>
+       <br />
+       <div class="important UPDATE">
+           In <b>Preliminary Steps</b>, you set up your <b>three initial tabs</b> in your current browser window <b>[This tab, your GitHub repo link tab, IBM Cloud tab]</b>. If you did not do this already, <b>go back</b> (by scrolling to the top and click <b>Preliminary Steps</b>) and make sure your browser window matches that mock window.</div>
+       <p>
+        Like logging into IBM Verse and IBM Cloud, you should be able to log into GitHub with your w3id. GitHub Enterprise is where the repository of application’s code <i>resides</i>. To learn more about how IBM uses GitHub Enterprise, visit
+        <a href="https://www.ibm.com/garage/method/practices/culture/tool_github" target="_blank">https://www.ibm.com/garage/method/practices/culture/tool_github</a>.
+       </p>
+       <div class="sectionTitle">1.1.2</div>
+       <br />
+       <table class="section_withImage">
+        <tbody>
+         <tr>
+          <td>
+           <img class="leftFloat" src="./img/1_1_2.png" />
+          </td>
+          <td>
+              <div class="step UPDATE">
+                In your browser window, switch to the <span class="magenta">GitHub tab</span>. <br/><i>(GSC-2020-lab-1/<span class="labnameHere UPDATE">YourLabName</span>-2020-lab: Repo for the GSC 2020 Lab 1) </i>
+              </div>
+              <p class="UPDATE">The email you received provided a direct link to your GitHub repository for this lab. You can <span class="blue">also</span> access it by selecting your repository on the left side menu of your available repositories, <b>GSC-2020-lab-1/<span class="magenta"><span class="labnameHere UPDATE">YourLabName</span></span>-2020-lab</b>.
+           </p>
+           <p class="UPDATE">Reminder: If you do <b>NOT</b> see this repository, please post a screenshot of your GitHub page with this left side menu, along with the message, <b>"I do not see my correct GitHub repository"</b> in the <b>Slack</b> channel (link the top right corner of the page).</p>
+          </td>
+         </tr>
+        </tbody>
+       </table>
+       <br />
+      </div>
+
+      <!-- 1.2 -->
+      <div id="sec_1_2">
+       <h2>
+        <a name="1_2">1.2 Review the drone application repository</a>
+       </h2>
+       <div class="sectionTitle">1.2.1</div>
+       <p>
+           Let’s review the code repository’s structure. Every application has source code which is stored in a <b>repository</b>. A repository contains a set of files, as well as the history of changes made to those files.
+        </p>
+       <p>
+           Repositories can contain folders and files, images, videos, spreadsheets, and data sets – <b>anything your project needs</b>. At the top level, you notice <b>public</b> and <b>src</b> folders, followed by a set of files. These files typically contain a <b>README.md</b> and can also include licensing info, contributors, deployment configuration, etc. You may even notice that the README.md is open for viewing <b>below</b> the files/folders, where you can learn some facts about this application.
+       </p>
+       <p>
+           The public folder often contains the HTML file so you can tweak it, for example, to set the page title. You can also add other assets to the public folder, as is the case for this lab repository, where there are some configuration files that allow customization of certain aspects of the user interface. Visit <a href="https://github.com/kmindi/special-files-in-repository-root/blob/master/README.md" target="_blank">https://github.com/kmindi/special-files-in-repository-root/blob/master/README.md</a> for more information on typical files you’d find in any repository and <a href="https://create-react-app.dev/docs/folder-structure/" target="_blank">https://create-react-app.dev/docs/folder-structure/</a> to learn more about the use of the <b>public</b> and <b>src</b> folder in React development.            
+       </p>
+
+       <div class="question">
+        💡 What type of drone application is in this repository? <span class="readmore">[Click to Read More]</span>
+       </div>
+       <div class="answer">
+            What you’re seeing in this repository is the <b><i>source code</i></b> for the remote drone console application, which was built using <b>React</b> (a best-in-class JavaScript library for building user interfaces), TypeScript (an open-source programming language with a strict syntactical superset of JavaScript which adds optional static typing), and <b>Node JS</b> (an open-source, cross-platform, JavaScript runtime environment). The application provides users with an interface to connect to a defined set of drones in order to assist users by leveraging services like aerial surveillance, inspection of infrastructures, first responders coordination, geothermal exploration, etc. for different industries. The dashboard provides users with drone operation statistics and other drone related information to effectively monitor, optimize and control the drones.
+       </div><br />
+
+       <p>
+            Find the <span class="magenta">public</span> <b>folder</b> <i>(see image below)</i>. Within this directory, you will be able to see <span class="magenta">config.json</span>, a JSON file where certain UI elements can be <b>changed</b>. This data structure was designed to be <b>easily edited</b> and will <b>dynamically change</b> the UI. You will edit the code and deploy that code change soon.
+       </p>
+
+       <div class="step">
+        Click on the <span class="magenta">public</span> folder.
+       </div><br /><br />
+
+       <img class="standardImage" src="./img/1_2_1.png" /><br /><br />
+
+       <div class="sectionTitle">1.2.2</div>
+
+       <p>Once in the <span class="magenta">public</span> folder, you should see <span class="magenta">config.json</span> file.</p>
+       <img class="standardImage" src="./img/1_2_2.png" />
+
+       <p>
+           GitHub allows users to see code <b>directly</b> in the webpage and even <b>interact</b> with it. You can <b>create, edit, move, and delete</b> files on a GitHub repository from the webpage. GitHub has support for navigation of code for many programming languages like Python, Java, JavaScript, and more. Visit <a href="https://help.github.com/en/github/managing-files-in-a-repository/managing-files-on-github" target="_blank">https://help.github.com/en/github/managing-files-in-a-repository/managing-files-on-github</a> to learn about all the capabilities of GitHub and what you can do with your code.
+       </p>
+
+       <div class="step">
+        Click on the <span class="magenta">config.json</span> file to see the code.
+       </div>
+      </div>
+
+      <!-- 1.3 -->
+      <div id="sec_1_3">
+       <h2>
+        <a name="1_3">1.3 Make a configuration change</a>
+       </h2>
+       <div class="sectionTitle">1.3.1</div>
+       <p>
+           Many developers do not edit code on GitHub directly. Instead, they use a range of different Integrated Development Environments (IDEs) and code editors like Visual Studio Code, XCode, Eclipse, etc. Then, developers use tools like GitHub Desktop, SourceTree or git commands on a command line to push code changes and commits to the remote code repository. <b>However</b>, for this lab, you will edit directly within the <b>GitHub web interface</b> to avoid installing these programs.      
+       </p>
+       <p>
+            Let’s edit the code in the <span class="magenta">config.json</span> file, your application’s <b>configuration file</b>, which adds customization to your application’s <b>user interface</b>.
+       </p>
+       <div class="step">Click on the <span class="magenta">Edit button</span> for config.json <i>(see image below)</i>.</div><br /><br />
+
+       <img class="standardImage" src="./img/1_3_1.png" /> <br /><br />
+
+       <div class="step">
+            In the editor, change the value associated with the <span class="magenta">ConsoleDisplayName</span> field to <b>anything you want</b>.  
+            (Currently the value is “<b>Remote Operations Console</b>”).
+        </div> <br /><br />
+
+        <div class="question">
+            💡 Why am I changing the <b>ConsoleDisplayName</b>? <span class="readmore">[Click to Read More]</span>
+        </div>
+        <div class="answer">
+            To understand the relationship between GitHub and the deployment environment (in this case, OpenShift), you will see your changes from this step after you have deployed the application in later steps.  As it is not plausible to have a lab user build their own application entirely in a limited time frame, making this simple change is meant to exemplify how code changes can propagate throughout the lifecycle of application development and deployment. <b>In later steps</b>, you will reference this change by having the option to view an already deployed instance of the default original application. 
+        </div><br/>
+
+        <p>
+            In some later example screenshots, you might see that the word <span class="blue">"Walkthrough"</span> was added in front of “<span class="blue">Remote Operations Console</span>”. <b>Any name or phrase</b> (like the name of your pet, your name, etc.) are options for ConsoleDisplayName. 🙂 For reference, you will later see this phrase at the <b><i>top</i></b> of your Remote Drone Dashboard application.
+        </p>
+
+        <p>
+            <span class="yellow">Be careful!</span> Any value you change for a field should contain <b>only alphanumeric characters and/or spaces</b>. Keep your values to <b>under 16 characters total</b>, but <b>at least one</b> character.
+        </p>
+
+        <div class="question">
+            💡 What do I do if I mess up and want to <b>reset my changes</b>? <span class="readmore">[Click to Read More]</span>
+        </div>
+        <div class="answer">
+            If you want to revert to the default config.json before committing, cancel your changes by refreshing the editor to start over.
+        </div><br/><br/>
+
+        <div class="sectionTitle">1.3.2 (Optional)</div>
+        <p>
+            You may notice that there are other fields/values also shown in the config.json editor.  These fields represent the physical drones that may be available for a given user to operate in their remote drone application console.   In the default code, you notice that there are three drones available.  
+       </p>
+       <p>
+           You may edit the values for the fields “friendly_name” and “drone_serial_no” as well (the <span class="friendlyCode"><b>bolded</b></span> values below), and the changes will later be reflected in the application. 
+       </p>
+       <p class="friendlyCode">
+           "friendly_name": "<b>Lab User Drone</b>", <br/>
+           "drone_serial_no": "<b>A12345</b>" <br/><br/>
+
+            "friendly_name": "<b>Damage Inspection Drone</b>", <br/>
+            "drone_serial_no": "<b>A123456</b>" <br/><br/>
+        
+            "friendly_name": "<b>Surveillance Drone</b>", <br/>
+            "drone_serial_no": "<b>A123457</b>” <br/>
+       </p>
+       <p>
+           <b>NOTE:  It is not necessary to change these fields</b> for the lab - but you can if you’d like to.
+       </p>
+      </div>
+
+      <!-- 1.4 -->
+      <div id="sec_1_4">
+        <h2>
+            <a name="1_4">1.4 Commit change to the master branch</a>
+        </h2>
+        <div class="sectionTitle">1.4.1</div>
+        <p>
+            Currently, you are editing directly on the master branch. The <b>master</b> branch is the <b>default</b> branch that your repository starts out with. As you continuously edit your code on your branch, those changes are reflected as <b><i>commits</i></b>. Commits include a <b>summary message</b> of what was changed, along with the files that were changed as a result of edited code. 
+        </p>
+        <p>
+            A situation could occur when you want to create <b><i>different versions</i></b> of your application - for example, when adding a new feature to the current code, you do not want to interfere with the version that others may be working on. Creating these versions are called <b><i>branches</i></b> – you could create a <b><i>new_feature branch</i></b> that is based on the <b><i>master branch</i></b>. Once satisfied with code changes in the new branch, the new_feature branch could then <b><i>be merged</i></b> into the master branch for all collaborators to use as their working copy. Visit <a href="https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell" target="_blank">https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell</a> for more information on git branch structure and architecture.
+        </p>
+        <p>
+            You will be committing your change you just made to the <b>master</b> branch.
+        </p>
+
+        <img src="./img/1_4_1.png" /> <br /><br />
+        
+        <div class="step">Using the above image as an example, add a <span class="magenta">brief summary message</span> that reflects the changes you’ve made to config.json.</div><br /><br />
+
+        <div class="question">
+            💡 Why should I be <b>descriptive yet brief</b> when I write a commit change message? <span class="readmore">[Click to Read More]</span>
+        </div>
+        <div class="answer">
+            It is important to be specific when writing the <span class="magenta">titles</span> and <span class="magenta">description</span> of code commits. However, overly detailed commits detract from quickly finding a commit. GitHub tracks changes so that if revision or reverting is necessary, descriptive yet brief commits can pinpoint the issues <b><i>much more quickly</i></b>.
+        </div><br/><br/>
+
+        <div class="step">
+            Make sure <b>Commit directly to the master branch</b> is selected. Then click the <b>Commit changes</b> button.
+        </div><br/><br/>
+
+        <div class="UPDATE">
+        <div class="sectionTitle">1.4.2</div>
+        <p>
+           Once you commit your changes, the page will refresh. In order to be prepared for the coming steps, make sure your GitHub tab is at the root level.
+        </p>
+
+        <div class="step">
+            Click on <span class="magenta"><span class="labnameHere UPDATE">YourLabName</span>-2020-lab</span> near the top, where it says on <b><span class="magenta"><span class="labnameHere UPDATE">YourLabName</span>-2020-lab</span> / public / config.json</b>.
+        </div><br/><br/>
+
+        <img src="./img/1_4_2_A.png" class="standardImage" /> <br /><br />
+
+        <p>
+            You have now completed Step 1 by viewing the root level of your repository with your latest commit. It is ready for the remaining steps of the lab.</p>
+
+        <img src="./img/1_4_2_B.png" class="standardImage" /> <br /><br />
+        </div>
+        
+
+      </div>
+
+     <!-- Finish Step 1 -->
+     <div id="sec_finishStep1">
+     <h2>
+      <a name="finishStep1">Finish Step 1</a>
+     </h2>
+     <div class="sectionTitle">You completed Step 1! 🎉</div>
+     <p>
+        You successfully made <b>a unique change to your application</b> using relevant development skills and utilizing GitHub.
+     </p>
+     <div class="rect magentaRect single">
+      <div class="in">
+        Step 1 <b>Completed</b><br /><br />
+        <div class="list">
+            ✅ Access GitHub Enterprise <br />
+            ✅ Review the drone application repository <br />
+            ✅ Make a configuration change <br />
+            ✅ Commit change to the master branch <br />
+        </div>
+     </div>
+    </div>
+     <p>
+        In the next steps, you will move onto deploying your remote drone dashboard application with <b>RedHat OpenShift</b> through <b>IBM Cloud</b>. In Step 2, you’ll learn about these services, access your project in a cluster, and explore the OpenShift web console. 
+     </p>
+     <div class="timeline">
+        <table>
+         <tbody>
+          <tr>
+           <td class="step completed">
+            <div class="title">Step 1 <b>Completed ✅</b></div><br />
+            ☑ Access GitHub Enterprise <br />
+            ☑ Review the drone application repository <br />
+            ☑ Make a configuration change <br />
+            ☑ Commit change to the master branch <br />
+           </td>
+           <td class="arrow">→</td>
+           <td class="step next">
+            <div class="title">Step 2 <b>Next</b></div><br />
+            ☑ Access IBM Cloud<br />
+            ☑ Access RedHat OpenShift cluster <br />
+            ☑ Open RedHat OpenShift web console <br />
+            ☑ Explore OpenShift web console <br />
+           </td>
+           <td class="arrow">→</td>
+           <td class="step">
+            <div class="title">Step 3</div><br />
+            ☑ Add an application to OpenShift <br />
+            ☑ Link OpenShift to GitHub repository <br />
+            ☑ Generate token and create application <br />
+           </td>
+           <td class="arrow">→</td>
+           <td class="step">
+            <div class="title">Step 4</div><br />
+            ☑ Explore topology<br />
+            ☑ Check build status<br />
+            ☑ Access deployed application<br />
+           </td>
+           <td class="arrow">→</td>
+           <td class="step">
+            <div class="title">Step 5</div><br/>
+            ☑ Explore user interface<br />
+            ☑ Consider industry use cases<br />
+           </td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+       <div class="nextStepBar" onClick="moveTo('s2')">
+        Ready? Move on to Step 2 →
+       </div>
+    </div>
+    </div>
+    </div>
+   </div>
+   <!--- Begin Step 2 -->
+   <div id="step2" class="main">
+        <div id="menu">
+         <a href="#step2" class="start">Step 2</a>
+         <a href="#2_1">2.1 Access IBM Cloud</a>
+         <a href="#2_2">2.2 Access RedHat OpenShift cluster</a>
+         <a href="#2_3">2.3 Open RedHat OpenShift web console</a>
+         <a href="#2_4">2.4 Explore OpenShift web console</a>
+         <a href="#finishStep2" class="end">Finish Step 2</a>
+        </div>
+        <div id="content">
+         <div id="main">
+          
+          <div id="sec_step2">
+           <h1>
+            <a name="step2">Step 2: Accessing RedHat OpenShift through IBM Cloud</a>
+           </h1>
+           <p>
+            As mentioned before, prior to when you began this lab, you were given user permissions to the existing <span class="blue">IBM Cloud</span> <b>organization</b> for the <span class="blue">SBaaS (Sandbox as a Service)</span> environment that was provisioned for this lab. A new project was created specifically for you in the OpenShift cluster within that organization, with all the necessary user policies.
+           </p>
+
+           <p>
+               In this section, you will navigate from the <b>IBM Cloud dashboard</b> within that organization to the provisioned <b>IBM Sandbox as a Service</b> workspace. Then, you will access a <b>cluster</b> and open the <b>RedHat OpenShift</b> web console. In addition to exploring the RedHat OpenShift interface on IBM Cloud, you’ll also get an overview of the capabilities that OpenShift provides.
+           </p>
+           <p>
+               <span class="tmagenta">Before you move on</span>, you may want a refresher on what exactly <span class="blue">Red Hat® OpenShift®</span> is. Red Hat® OpenShift® on IBM Cloud™ is a managed offering to create your own OpenShift cluster of hosts to deploy and manage containerized apps on IBM Cloud. <b>OpenShift is essentially a layer that's built on top of Kubernetes</b>, and makes working with it much easier: by taking a lot of the difficult tasks (like deploying applications and doing things like day-to-day operations) and building a web console in the CLI, as well as a <b><i>facade</i></b> on top of Kubernetes to make all of those tasks more streamlined and easier to do.
+            </p>
+            <p>
+                <img src="./img/container_architecture.png" class="sideImage_txt"/>
+                <span class="tmagenta">Let’s take a moment to review some concepts you will be delving into in the next few steps.</span> Consider the remote drone dashboard application you helped develop by editing in the <b>previous step</b>. You do your work on your laptop and if your dashboard had real life usage and contained a suite of various real-time systems and technologies, your environment might have a <b>specific configuration</b>. Other developers may have slightly <b>different configurations</b>. The application you’re developing relies on that configuration and is dependent on specific libraries, dependencies, and files. Meanwhile, your team has development and production environments which are standardized with their own configurations and their own sets of supporting files. You want to emulate those environments as much as possible locally, but without all of the <b>overhead</b> of recreating the server environments. So, how do you make your app work <b><i>across these environments</i></b>, pass quality assurance, and get your app deployed without massive headaches, rewriting, and break-fixing? The answer: <span class="blue">containers</span>.
+            </p>
+            <p>
+                The <b>container</b> that holds your application has the necessary libraries, dependencies, and files so that you can move it through production without all of the nasty side effects. Containers provide a standard way to package your application's code, configurations, and dependencies into a single unit that can run as a resource-isolated process on a server. To run your app in Kubernetes on Red Hat OpenShift on IBM Cloud, you must first <b>containerize</b> your app by creating a container image that you store in a container registry. Container image distribution is agile, small, and portable, and is <b>a lot easier</b> than installing new copies of operating systems – which is an ideal outcome for all.
+            </p>
+
+            <p>
+                In the coming steps, you will take your <b>containerized</b> remote drone dashboard <b>application</b> and run it on RedHat OpenShift, which is a <b>Kubernetes</b> deployment that manages container images. It can be easy to confuse the two, but RedHat OpenShift and Kubernetes are different – to put it simply, Kubernetes is the <b>"kernel"</b> of distributed systems, while OpenShift is the <b>“distribution”</b>.
+            </p>
+            <p>
+                Now that you have been refreshed on what OpenShift and its related components are, <span class="tmagenta">there’s an important distinction between the process outlined in this lab, versus other common processes of deployment on OpenShift, which will be outlined in the next steps.</span> <b>For now, let’s start out by exploring the IBM Cloud dashboard and OpenShift interface.</b>
+            </p>    
+          
+           <div class="whole">
+            <div class="rect blueRect">
+             <div class="in">
+              Technologies Used
+              <br />
+              <img src="./img/cloud.png" /><br/>
+              <img src="./img/openshift.png" />
+             </div>
+            </div>
+    
+            <div class="rect magentaRect">
+             <div class="in">
+              Your Tasks for Step 2 <br /><br />
+              <div class="list">
+               ✅ Access IBM Cloud <br/>
+               ✅ Access RedHat OpenShift cluster <br/>
+               ✅ Open RedHat OpenShift web console <br/>
+               ✅ Explore OpenShift web console <br/>
+              </div>
+             </div>
+            </div>
+           </div>
+           <br />
+           <br />
+           <div class="timeline">
+            <table>
+             <tbody>
+              <tr>
+               <td class="step completed">
+                <div class="title">Step 1 <b>Completed ✅</b></div><br />
+                ☑ Access GitHub Enterprise <br />
+                ☑ Review the drone application repository <br />
+                ☑ Make a configuration change <br />
+                ☑ Commit change to the master branch <br />
+               </td>
+               <td class="arrow">→</td>
+               <td class="step inprogress">
+                <div class="title">Step 2 <b>In Progress</b></div><br />
+                ☑ Access IBM Cloud<br />
+                ☑ Access RedHat OpenShift cluster <br />
+                ☑ Open RedHat OpenShift web console <br />
+                ☑ Explore OpenShift web console <br />
+               </td>
+               <td class="arrow">→</td>
+               <td class="step">
+                <div class="title">Step 3</div><br />
+                ☑ Add an application to OpenShift <br />
+                ☑ Link OpenShift to GitHub repository <br />
+                ☑ Generate token and create application <br />
+               </td>
+               <td class="arrow">→</td>
+               <td class="step">
+                <div class="title">Step 4</div><br />
+                ☑ Explore topology<br />
+                ☑ Check build status<br />
+                ☑ Access deployed application<br />
+               </td>
+               <td class="arrow">→</td>
+               <td class="step">
+                <div class="title">Step 5</div><br/>
+                ☑ Explore user interface<br />
+                ☑ Consider industry use cases<br />
+               </td>
+              </tr>
+             </tbody>
+            </table>
+           </div>
+           <br />
+          </div>
+    
+          <!-- 2.1 -->
+          <div id="sec_2_1">
+           <h2>
+            <a name="2_1">2.1 Access IBM Cloud</a>
+           </h2>
+    
+           <div class="sectionTitle">2.1.1</div>
+           <p>
+                You’ll need to access RedHat OpenShift through the <b>IBM Cloud</b> in order to build and deploy your application. 
+           </p>
+
+           <div class="step UPDATE">
+                In your browser window, switch to the <span class="magenta">IBM Cloud tab</span>. <br/><i>(IBM Cloud)</i>
+              </div>
+
+           <p class="UPDATE">
+               If you did not do so in the Preliminary steps, you can <span class="blue">also</span> log in with your w3id to <b>( New Tab ⇒ <a href="https://cloud.ibm.com" target="_blank">https://cloud.ibm.com</a>)</b> <i>(Single Sign-On Required with w3id)</i>
+            </p> <br/><br/>
+
+            <div class="question">
+                💡 Why do I need to log into <b>IBM Cloud</b> first?  <span class="readmore">[Click to Read More]</span>
+            </div>
+            <div class="answer">
+                Your IBM Cloud account has already been added to an organization ("IBM") which contains necessary components for this lab. 
+            </div>
+
+            <p>
+                <img src="./img/2_1_1.png" class="sideImage_right"/>
+                Once you’ve logged in, you should be greeted with a dashboard that displays the various resources that IBM Cloud has to offer. From Cognitive APIs to DevOps to Classic Infrastructure resources, IBM Cloud has many offerings to explore.
+            </p>
+            <p>
+                <b>At the top of the dashboard, you’ll see a navigation bar</b>. On the right side of the navigation bar, there is a <b>dropdown</b> for various accounts you may be apart of. Most likely, the default is the last account you opened, if not the only one available.
+            </p>
+            <p>
+                For this lab, you’ll be working in the <span class="magenta">1500867 – IBM account</span>.
+            </p>
+            
+            <div class="step">
+                Click on the <span class="magenta">1500867 – IBM account</span> in the IBM Cloud’s navigation bar dropdown.
+            </div>
+
+
+          </div>
+    
+          <!-- 2.2 -->
+          <div id="sec_2_2">
+           <h2>
+            <a name="2_2">2.2 Access RedHat OpenShift cluster</a>
+           </h2>
+           <div class="sectionTitle">2.2.1</div>
+           <p>
+                Once you click on <b>1500867 - IBM</b>, your dashboard will update with <b>Resources</b> that are specific to it. You should see a <b>Resource summary</b> card that currently contains a Resource: Clusters (1).
+           </p>
+
+           <table width="100%">
+               <tbody>
+                   <tr>
+                       <td><div class="step">Click the resource called <b>Clusters</b>.</div></td>
+                       <td><img src="./img/2_2_1.png" class="sideImage_right" /></td>
+                    </tr>
+                </tbody>
+            </table> <br/><br/>
+
+            <div class="question">
+                💡 What is a <b>cluster</b>? <span class="readmore">[Click to Read More]</span>
+            </div>
+            <div class="answer">
+                <img src="./img/cluster.png" class="sideImage_left"/><br/><br/>In Kubernetes, a <b>cluster</b> consists of one or more hosts that are called <b><i>worker nodes</i></b>. Worker nodes are managed by a <b><i>master</i></b> that centrally controls and monitors all Kubernetes resources in the cluster. So when you deploy the resources for a containerized app, the Kubernetes master decides which worker node to deploy those resources on, accounting for the deployment requirements and available capacity in the cluster. Kubernetes resources include services, deployments, and pods.
+            </div>
+
+            <div class="sectionTitle">2.2.2</div>
+           <p>
+               You should see now see a <b>Resource list</b> that <span class="UPDATE2">may contain multiple Cluster resources, but for this lab, you will only need the cluster</span> resource, <span class="magenta">mycluster-dal12-b3c.4x16</span>. <span class="UPDATE2">Additionally, in other workspaces or your personal workspace, you may have</span> dozens of other applications, services, storage, developer tools, etc. These resources are all hosted on IBM Cloud. Information such as the offering, location, status can be seen for each resource.
+            </p>
+
+            <img class="standardImage" src="./img/2_2_2.png" /><br/><br/>
+
+            <div class="step">
+                Click the <span class="magenta">mycluster-dal12-b3c.4x16</span> cluster.
+            </div>
+               
+          </div>
+    
+          <!-- 2.3 -->
+          <div id="sec_2_3">
+           <h2>
+            <a name="2_3">2.3 Open RedHat OpenShift web console</a>
+           </h2>
+           <div class="sectionTitle">2.3.1</div>
+           <p>
+               Let’s examine this cluster’s (<b>mycluster-dal12-b3c.4x16</b>’s) overview of the resource.
+           </p>
+           <p>
+               On the left side is the additional settings menu. In the middle is the the summary card for the cluster.  On the right side, you’ll see worker nodes/cluster insights. It includes diagnostics and status information about the cluster. All of this provides a summary of the OpenShift instance before you jump in and work directly inside of it.
+            </p>
+
+            <img class="standardImage" src="./img/2_3_1_A.png" /><br/><br/>
+
+            <table width="100%">
+                <tbody>
+                    <tr>
+                        <td><div class="step">Click on the <b>OpenShift web console</b> button in the top right to access the console.</div></td>
+                        <td><img src="./img/2_3_1_B.png" class="sideImage_right" /></td>
+                    </tr>
+                </tbody>
+            </table> <br/><br/>
+
+
+        <div class="UPDATE">
+            <p>
+                When you click this button, you may be prompted with an alert saying you need to <b>enable pop-ups</b>. If you get that prompt, enable pop-ups for this site click the OpenShift web console button a second time and wait for the new page to open.
+            </p>
+             
+             <div class="problem question">
+                ⚠️ How do I enable pop-ups? <span class="readmore">[Click to Troubleshoot]</span>
+                </div>
+                <div class="answer">
+                    Generally speaking, in the address bar, you may see an alert saying "Pop-up blocked". Click the link for the pop-up you want to see. To always see pop-ups for the site, select Always allow pop-ups and then Done.<br/><br/>
+
+
+                    <b>Windows Operating System</b> <br/>
+                    Firefox: <br/>
+                    <a href="https://support.mozilla.org/en-US/kb/pop-blocker-settings-exceptions-troubleshooting" target="_blank">https://support.mozilla.org/en-US/kb/pop-blocker-settings-exceptions-troubleshooting</a> <br/> <br/>
+                    Google Chrome: <br/>
+                    <a href="https://support.google.com/chrome/answer/95472?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">https://support.google.com/chrome/answer/95472?co=GENIE.Platform%3DDesktop&hl=en</a> <br/> <br/> <br/>
+                    
+                    <b>Mac Operating System</b> <br/>
+                    Safari: <br/>
+                    <a href="https://www.technipages.com/safari-popup-blocker" target="_blank">https://www.technipages.com/safari-popup-blocker</a> <br/> <br/>
+                    Firefox: <br/>
+                    <a href="https://support.mozilla.org/en-US/kb/pop-blocker-settings-exceptions-troubleshooting" target="_blank">https://support.mozilla.org/en-US/kb/pop-blocker-settings-exceptions-troubleshooting</a> <br/> <br/>
+                    Google Chrome: <br/>
+                    <a href="https://support.google.com/chrome/answer/95472?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">https://support.google.com/chrome/answer/95472?co=GENIE.Platform%3DDesktop&hl=en</a> <br/> <br/>
+
+                </div>
+                </div>
+
+            <p>
+                It may take several seconds for this new tab to load completely. The reason for this is that you have moved into a <b>RedHat OpenShift instance</b>. Here you can see <b>which projects and applications are deployed on your cluster.</b>
+            </p>
+            <div class="UPDATE">
+                <div class="important" style="text-align: left">
+                    Before we get too far, let’s make make sure you are in the Developer Perspective for the Project space allocated for this lab: <br/> <br/>
+                    1) Set your perspective in the left menu by clicking the dropdown and selecting <b>&lt;/&gt; Developer</b> (instead of <i>Administrator</i>).<br/> <br/> 
+                    2) Click the dropdown where <span class="UPDATE2">it</span> says <b>Project</b> <span class="UPDATE2">(at the top)</span> and make sure "<span class="labnameHere UPDATE">YourLabName</span>-2020-lab-1" is selected. <br/> <br/> 
+                    3) Click <b>Topology</b> on the left menu.</div>
+
+              <div class="problem question">
+                ⚠️ My page looks <b>different</b>! / I see an <b>error</b> on the page below! <span class="readmore">[Click to Troubleshoot]</span>
+                </div>
+                <div class="answer">
+                    <img src="./img/2_3_1_error.png" class="sideImage_left_big"/><br/><br/>If you see "<b>Restricted Access: You don’t have access to this section due to cluster policy</b>" along with the error details, <i>"deploymentconfigs.apps.openshift.io is forbidden: User <span class="UPDATE">“IAM#...”</span> cannot list resource “deploymentconfigs” in API group “apps.openshift.io" in the namespace “default”</i>, make sure to select the <b>developer perspective</b> and that you are in the <b>correct project</b>. <span class="UPDATE">Your project should be  "<b><span class="labnameHere UPDATE">YourLabName</span>-2020-lab-1</b>".</span>
+
+                    <p>If you do <b>NOT</b> see a page similar to the one below, post a screenshot of your page in the <b>Slack</b> channel (link in the top right corner) along with the message, <b>"My Topology view in OpenShift doesn't match the screenshot in Step 2.3.1."</b></p>
+
+                </div> 
+
+                <div class="question">
+                    💡 What is the node that is <b>already there</b> in my OpenShift instance? <span class="readmore">[Click to Read More]</span>
+                </div>
+                <div class="answer">
+                    As part of the lab setup for each users, <b>an instance</b> of the <b>default, unchanged</b> remote drone console application was <b>deployed</b> in your OpenShift project to be used as a reference. If you remember in Step 1, you edited config.json, which changed the remote drone console application’s title at the top.  In Step 3, you will deploy your own instance based on the unique changes you made in Step 1. 
+                </div><br/>   
+
+                <img class="standardImage" src="./img/2_3_1_C.png" /><br/><br/><br/>
+             </div>
+
+          </div>
+    
+          <!-- 2.4 -->
+          <div id="sec_2_4">
+            <h2>
+                <a name="2_4">2.4 Explore OpenShift web console</a>
+            </h2>
+            <div class="sectionTitle">2.4.1</div>
+            <p>
+                Confirm that you’re in the <span class="magenta">developer perspective</span> on the top left. You have two perspectives available: developer, and administrator (which is usually the default perspective).
+            </p>
+            <div class="question">
+                💡 What is the <b>developer perspective</b>? How is it different? <span class="readmore">[Click to Read More]</span>
+            </div>
+            <div class="answer">
+                The Developer perspective provides workflows specific to developer use cases, such as the ability to:
+                <ul>
+                <li>Create and deploy applications on OpenShift Container Platform by <b>importing existing codebases</b>, images, and <b>Dockerfiles</b></li>
+                <li>Visually interact with applications, components, and services associated with them within a project and monitor their deployment and build status</li>
+                <li>Group components within an application and connect the components within and across applications.</li>
+                <li>Integrate serverless capabilities</li>
+                </ul>
+                The Administrator perspective lets you manage and set up the components that your team needs to run your apps, such as projects for your workloads, networking, and operators for integrating IBM, Red Hat, 3rd party, and custom services into the cluster.
+            </div>
+
+            <p>
+                The current view in the OpenShift web console is the <span class="magenta">Topology</span> view in the <b>Developer</b> perspective. It provides a visual representation of all the applications within a project, their build status, and the components and services associated with them. <b>Review the annotated screenshot below which summarizes the key parts of this view.</b>
+            </p>
+
+            <img class="standardImage" src="./img/2_4_1.png" /> <br /><br />
+
+            <div class="question">
+                💡 What does "<b>DC</b>" mean next to application resource name?  <span class="readmore">[Click to Read More]</span>
+            </div>
+            <div class="answer">
+                The application resource name is appended with indicators for the different types of resource objects as follows:<br/>
+                <b>DC</b>: DeploymentConfigs<br/>
+                <b>D</b>: Deployment<br/>
+                <b> SS</b>: StatefulSet<br/>
+                <b>DS</b>: Daemonset<br/><br/>
+                Visit <a href="https://docs.openshift.com/container-platform/4.2/applications/application_life_cycle_management/odc-viewing-application-composition-using-topology-view.html#odc-viewing-application-composition-using-topology-view" target="_blank">https://docs.openshift.com/container-platform/4.2/applications/application_life_cycle_management/odc-viewing-application-composition-using-topology-view.html#odc-viewing-application-composition-using-topology-view</a> to learn more the application composition using the Topology view.
+            </div> <br/>
+
+            <p>
+                You’ll be able to dive into this web console’s functions and take action in the next step. Until then, become familiar with this view. <b>Optionally</b>, you can click the arrow button on the top right of the already deployed instance to see the original dashboard (which does not have your code changes).
+            </p>
+
+
+
+          </div>
+    
+         <!-- Finish Step 2 -->
+         <div id="sec_finishStep2">
+         <h2>
+          <a name="finishStep2">Finish Step 2</a>
+         </h2>
+         <div class="sectionTitle">You completed Step 2! 🎉</div>
+         <p>
+            You successfully accessed and reviewed the OpenShift web console view by logging into IBM Cloud and selecting the available cluster resource. 
+         </p>
+         <div class="rect magentaRect single">
+          <div class="in">
+            Step 2 <b>Completed</b><br /><br />
+            <div class="list">
+                ✅ Access IBM Cloud <br />
+                ✅ Access RedHat OpenShift cluster <br />
+                ✅ Open RedHat OpenShift web console <br />
+                ✅ Explore OpenShift web console <br />
+            </div>
+         </div>
+        </div>
+         <p>
+            In the next step, you will finally begin the setup for adding your custom remote drone dashboard application to OpenShift. By linking OpenShift to your GitHub repository, you’ll be able to create and build your application.
+         </p>
+         <div class="timeline">
+            <table>
+             <tbody>
+              <tr>
+               <td class="step completed">
+                <div class="title">Step 1 <b>Completed ✅</b></div><br />
+                ☑ Access GitHub Enterprise <br />
+                ☑ Review the drone application repository <br />
+                ☑ Make a configuration change <br />
+                ☑ Commit change to the master branch <br />
+               </td>
+               <td class="arrow">→</td>
+               <td class="step completed">
+                <div class="title">Step 2 <b>Completed ✅</b></div><br />
+                ☑ Access IBM Cloud<br />
+                ☑ Access RedHat OpenShift cluster <br />
+                ☑ Open RedHat OpenShift web console <br />
+                ☑ Explore OpenShift web console <br />
+               </td>
+               <td class="arrow">→</td>
+               <td class="step next">
+                <div class="title">Step 3 <b>Next</b></div><br />
+                ☑ Add an application to OpenShift <br />
+                ☑ Link OpenShift to GitHub repository <br />
+                ☑ Generate token and create application <br />
+               </td>
+               <td class="arrow">→</td>
+               <td class="step">
+                <div class="title">Step 4</div><br />
+                ☑ Explore topology<br />
+                ☑ Check build status<br />
+                ☑ Access deployed application<br />
+               </td>
+               <td class="arrow">→</td>
+               <td class="step">
+                <div class="title">Step 5</div><br/>
+                ☑ Explore user interface<br />
+                ☑ Consider industry use cases<br />
+               </td>
+              </tr>
+             </tbody>
+            </table>
+           </div>
+           <div class="nextStepBar" onClick="moveTo('s3')">
+            Ready? Move on to Step 3 →
+           </div>
+        </div>
+        </div>
+        </div>
+   </div>
+   <!--- Begin Step 3 -->
+    <div id="step3" class="main">
+        <div id="menu">
+            <a href="#step3" class="start">Step 3</a>
+            <a href="#3_1">3.1 Add an application to OpenShift</a>
+            <a href="#3_2">3.2 Link OpenShift to GitHub repository</a>
+            <a href="#3_3">3.3 Generate token and create application</a>
+            <a href="#finishStep3" class="end">Finish Step 3</a>
+        </div>
+        <div id="content">
+            <div id="main">
+            
+            <div id="sec_step3">
+            <h1>
+            <a name="step3">Step 3: Creating Application in OpenShift from GitHub</a>
+            </h1>
+            <p>
+                In the last step, you accessed and reviewed the OpenShift web console through the IBM Cloud dashboard. You noticed there was already an instance running there – a default remote drone dashboard application. Remember that in Step 1, you made configuration changes for your own unique remote drone dashboard application. It’s now time to <b>set up deployment of this repository.</b>
+            </p>
+            <p>
+                Hinted at towards the end of Step 2’s introduction, <span class="tmagenta">there’s an important distinction between the process outlined in this lab, versus other common processes of deployment on OpenShift</span>. For this lab, the approach <b>you</b> will take will involve pulling GitHub repository code to build a container image from a Dockerfile. However, this is merely one approach to create an application on OpenShift. In fact, there are <b>multiple ways</b> of creating an application which are <b>not covered in this lab write-up as thoroughly</b> but are <b>useful</b> to learn about.
+            </p>
+            <p>
+                <span class="blue">Options for creating a new application in OpenShift</span><br/>
+                <span class="tblue"><a target="popup" onclick="window.open('./options.html','name','width=600,height=850')">Click here to read a summary of the several ways of creating a new application in OpenShift <b>(Open a New Window)</b></a></span>
+            </p>
+            
+            <div class="whole">
+                <div class="rect blueRect">
+                    <div class="in">
+                    Technologies Used
+                    <br />
+                    <img src="./img/dockerfile.png" class="sideTechnology"/>
+                    <img src="./img/github.png" />
+                    <img src="./img/openshift.png" />
+                    </div>
+                </div>
+        
+                <div class="rect magentaRect">
+                    <div class="in">
+                        Your Tasks for Step 3 <br /><br />
+                        <div class="list">
+                        ✅ Add an application to OpenShift <br/>
+                        ✅ Link OpenShift to GitHub repository <br/>
+                        ✅ Generate token and create application <br/>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="timeline">
+            <table>
+                <tbody>
+                <tr>
+                <td class="step completed">
+                <div class="title">Step 1 <b>Completed ✅</b></div><br />
+                ☑ Access GitHub Enterprise <br />
+                ☑ Review the drone application repository <br />
+                ☑ Make a configuration change <br />
+                ☑ Commit change to the master branch <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 2 <b>Completed ✅</b></div><br />
+                ☑ Access IBM Cloud<br />
+                ☑ Access RedHat OpenShift cluster <br />
+                ☑ Open RedHat OpenShift web console <br />
+                ☑ Explore OpenShift web console <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step inprogress">
+                <div class="title">Step 3 <b>In Progress</b></div><br />
+                ☑ Add an application to OpenShift <br />
+                ☑ Link OpenShift to GitHub repository <br />
+                ☑ Generate token and create application <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step">
+                <div class="title">Step 4</div><br />
+                ☑ Explore topology<br />
+                ☑ Check build status<br />
+                ☑ Access deployed application<br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step">
+                <div class="title">Step 5</div><br/>
+                ☑ Explore user interface<br />
+                ☑ Consider industry use cases<br />
+                </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            <br />
+            </div>
+    
+            <!-- 3.1 -->
+            <div id="sec_3_1">
+            <h2>
+            <a name="3_1">3.1 Add an application to OpenShift</a>
+            </h2>
+    
+            <div class="sectionTitle">3.1.1</div>
+            <table width="100%">
+                <tbody>
+                    <tr>
+                        <td style="text-align:center"><img src="./img/3_1_1.png" class="sideImage_left_tb" /></td>
+                        <td><p>As detailed in the <span class="tblue">Options for creating a new application in OpenShift</span> pop-up section above, you have <b>several options</b> to add an application to OpenShift. In this lab, we are covering how to add an application <b>from Dockerfile</b>.</p>
+                        <div class="step">From the OpenShift web console left navigational menu (with Developer perspective selected), click on the <b>+ Add option</b>.</div></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div class="sectionTitle">3.1.2</div></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>A Dockerfile is an instruction document in a GitHub repository. These instructions contain the commands that are needed to assemble a Docker image. Once executed, the Dockerfile utilizes the files in the PATH or URL parameter to start building the image. In this lab, the Dockerfile will be used to build the image on OpenShift.</p>
+                            <p>Visit <a href="https://nodejs.org/fr/docs/guides/nodejs-docker-webapp/#creating-a-Dockerfile" target="_blank">https://nodejs.org/fr/docs/guides/nodejs-docker-webapp/#creating-a-Dockerfile</a> to learn how to make your own Dockerfile for an application.</p>
+                        </td>
+                        <td style="text-align:center">
+                            <img src="./img/3_1_2_A.png" class="sideImage_right_tb" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center"><img src="./img/3_1_2_B.png" class="sideImage_left_tb" /></td>
+                        <td>
+                            <div class="step">Click on <b>From Dockerfile</b>.</div>
+                            <p>You will then be redirected to the <b>Import from Dockerfile</b> page form with several fields and values to fill out.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            </div>
+    
+            <!-- 3.2 -->
+            <div id="sec_3_2">
+            <h2>
+            <a name="3_2">3.2 Link OpenShift to GitHub repository</a>
+            </h2>
+
+            <div class="sectionTitle">3.2.1</div>
+
+            <p>
+                The following steps will require copying and pasting. 
+            </p>
+            <img src="./img/3_2_1.png" class="sideImage_right" />
+            <p>
+                The first field in the <b>Import from Dockerfile</b> form asks for the <b>Git Repo URL*</b>. In Step 1, you made changes to your GitHub repository. Find the link to this URL by going back to your GitHub tab  (<span class="blue UPDATE"><a class="LABUSER_GIT_LINK" href="https://github.ibm.com/GSC-2020-lab-1/YourLabName-2020-lab" target="_blank">
+    https://github.ibm.com/GSC-2020-lab-1/YourLabName-2020-lab/</a></span>).
+            </p>
+
+        <div class="UPDATE">
+            <p>You should have your GitHub repo still open in another tab.<br/>Return to this tab and click on the title at the top (<span class="labnameHere UPDATE">YourLabName</span>-2020-lab)</p>
+
+              <div class="step UPDATE">
+                In your browser window, switch back to the <span class="magenta">GitHub tab</span>. <br/><i>(GSC-2020-lab-1/<span class="labnameHere UPDATE">YourLabName</span>-2020-lab: Repo for the GSC 2020 Lab 1) </i>
+              </div>
+
+            <p>
+                If you had closed your GitHub tab, you can <span class="blue">also</span> go to <span class="blue UPDATE"><a class="LABUSER_GIT_LINK" href="https://github.ibm.com/GSC-2020-lab-1/YourLabName-2020-lab" target="_blank">
+    https://github.ibm.com/GSC-2020-lab-1/YourLabName-2020-lab/</a></span> in another tab.
+            </p>
+
+            <p>You should see the GitHub repository you worked with in Step 1. You need to copy the <b>.git url</b> from your repository.</p>
+            <div class="step">On your GitHub repo page, click on the green <span class="CloneOrDownload">Clone or download</span> button near the top right.</div><br/><br/>
+            <p>You may have noticed an option to Use SSH, but for this exercise we will using the <b>default option to use HTTPS</b>.</p><br/>
+            
+            <div class="step">Click on the <span class="magenta">Copy to clipboard button &nbsp;<svg class="octicon octicon-clippy" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M2 13h4v1H2v-1zm5-6H2v1h5V7zm2 3V8l-3 3 3 3v-2h5v-2H9zM4.5 9H2v1h2.5V9zM2 12h2.5v-1H2v1zm9 1h1v2c-.02.28-.11.52-.3.7-.19.18-.42.28-.7.3H1c-.55 0-1-.45-1-1V4c0-.55.45-1 1-1h3c0-1.11.89-2 2-2 1.11 0 2 .89 2 2h3c.55 0 1 .45 1 1v5h-1V6H1v9h10v-2zM2 5h8c0-.55-.45-1-1-1H8c-.55 0-1-.45-1-1s-.45-1-1-1-1 .45-1 1-.45 1-1 1H3c-.55 0-1 .45-1 1z"></path></svg></span> to the right of the git URL.</div>
+            <p>Now that you have copied your GitHub repository’s <b>git URL link</b>, you are able to paste it back into that first field that asks for <b>Git Repo URL*</b>.</p>
+
+            <div class="step"> <span class="UPDATE2">Click back to your OpenShift tab before moving onto the next step (3.2.2).</span></div>
+            </div>
+
+            <div class="sectionTitle">3.2.2</div>
+
+            <img src="./img/3_2_2.png" class="sideImage_left_med" />
+            <div class="step"><span class="magenta">Paste</span> the <b>copied git URL link</b> into the value for <span class="magenta">Git Repo URL*</span>.</div>
+            <p>You have provided a <b>git URL</b>, which tells OpenShift that the <b>Dockerfile</b> it requires resides in that s<b>pecific GitHub repository</b>. In the next steps, you will continue to provide OpenShift with the access and permissions necessary to interact with that Dockerfile.</p>
+            <div class="step">
+                Click the <b>Show Advanced Git Options</b> to reload the field and display additional options.
+            </div>
+
+            <table width="100%">
+                <tbody>
+                    <tr>
+                        <td colspan="2"><div class="sectionTitle">3.2.3</div></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><p>An option to choose the <b>Git Type*</b> should appear. Since you are using GitHub Enterprise, you’ll choose that option for it.</p></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right"><div class="step">When prompted, change the Git Type* selection to be GitHub.</div></td>
+                        <td style="text-align: left"><img src="./img/3_2_3.png" class="sideImage_right_tb" /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="question">
+                💡 What are the <b>other options</b> listed (besides <b>GitHub</b>)? <span class="readmore">[Click to Read More]</span>
+            </div>
+            <div class="answer">
+                    In the Git Type dropdown, there are other Git types like GitLab, BitBucket, or Other. These are other Git tools that are like GitHub and can also manage and edit code. To see a comparison of these three Git tools, [click here: Bitbucket vs. Github vs. Gitlab] (<a href="https://stackshare.io/stackups/bitbucket-vs-github-vs-gitlab" target="_blank">https://stackshare.io/stackups/bitbucket-vs-github-vs-gitlab</a>).
+            </div>
+
+            </div>
+    
+            <!-- 3.3 -->
+            <div id="sec_3_3">
+                <h2>
+                <a name="3_3">3.3 Generate token and create application</a>
+                </h2>
+                <div class="sectionTitle">3.3.1</div>
+                <p>You may be wondering <b>how</b> OpenShift is able to access the Dockerfile in your GitHub repository, when even <b><i>you, the owner of that GitHub repository</i></b>, have to login into GitHub Enterprise with Single Sign-On authentication with you w3ID to see it. That’s where <span class="blue">Source Secret</span> comes in.</p>
+                <p>Source Secret contains credentials for pulling your source code. As the name suggests, it is <b>NOT intended</b> to be used publicly and is something only you can share with applications you fully trust. You will use GitHub’s Personal Access Token to grant access to your GitHub repository to OpenShift.</p>
+                <table width="100%">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="step">Click the <b>Show Advanced Git Options</b> to reload the field and display additional options.</div>
+                                <br/><br/>
+                                <div class="step">Under <b>Source Secret</b>, select <b>Create New Secret</b>.</div>
+                                <p>A <b>pop-up</b> should open when you click Create New Secret.</p>
+                            </td>
+                            <td><img src="./img/3_3_1.png" class="sideImage_right_big" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><div class="sectionTitle">3.3.2</div></td>
+                        </tr>
+                        <tr>
+                            <td><img src="./img/3_3_2.png" class="sideImage_left_med" /></td>
+                            <td>
+                                <p>The <b>Create Source Secret</b> pop-up contains fields that will be used to enter your authentication credentials.</p>
+                                <p>Your Username will be your <b>IBM email</b>, and your Password or Token will be a <b>token</b>, the <b><i>Personal Access Token</i></b> that we will retrieve shortly.</p>
+                                <p>In the screenshot to the left, <b>the Secret Name</b> for this lab was entered as "<b>walkthrough</b>".</p>
+                                <div class="step">
+                                    Provide a value to the Secret Name* field (example: <span class="magenta">walkthrough</span>).
+                                </div><br/><br/>
+                                <div class="step">Add <span class="magenta">your IBM email</span> to the <b>Username</b> value.</div>
+                                <p>Notice that the next field is <b>Password or Token</b>, which will be explored in the following section.</p>
+                                <div class="important UPDATE">
+                                    You cannot fill the Password/Token field just yet. But in the next step (3.3.3), you will generate a token that <b>will be pasted into this field</b>. So, don't close this tab just yet, and continue reading the next step.</div>
+                            </td>    
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="sectionTitle">3.3.3</div>
+
+                <p>The preferred mechanism for accessing a private Git repository is to use an SSH connection and a repository SSH key. However, you will use personal access tokens to allow OpenShift to access your private repository.</p>
+                <p><b>Personal access tokens</b> are an <b>alternative</b> to the password you would use when accessing your account on the Git repository hosting service. You can think of personal access tokens as “house keys” to letting whoever has the key go into your house, or in this case your repository, and view it. You can designate your “house key” to have <b><i>predefined privileges</i></b> such as only letting the person who has that key enter your house - but do nothing when they’re inside of it. Or, the owner of the key can enter the house and do anything the owner of the house can.</p>
+                <div class="question">
+                    💡 Why are <b>SSH keys</b> the <b>preferred</b> way of accessing a private repository versus <b>Personal Access Tokens</b>? <span class="readmore">[Click to Read More]</span>
+                </div>
+                <div class="answer">
+                    The preferred mechanism for accessing a private Git repository is to use an SSH connection and a repository SSH key. A repository SSH key, however, can only be used where the OpenShift cluster doesn't have access via an SSH connection blocked by a firewall. Being blocked by a firewall might occur if you're running an on-premise OpenShift cluster behind a corporate firewall, but using a Git hosting service such as GitHub (which is the case in this lab with GitHub Enterprise needing IBM SSO authentication first). The main reason the lab instructions detail token path is because that can be created easily from the browser. 
+                    GitHub instructions for making an SSH key are CLI. You can use SSH keys for IBM GitHub Enterprise. In the case of SSH connections being blocked, it is necessary to fallback to using a personal access token and an HTTPS connection.                     
+                </div>
+                <p>
+                    Any number of access tokens can be created, and you can create separate tokens for each separate client you may want to use to access your account. By using a separate token per client you can <b>control</b> what <b>level of access</b> each has, including whether they have <b>read-only access</b>, or can <b>update repositories</b>. A token for a specific client can be <b>revoked</b> without affecting other clients. Although what actions a specific client can do can be controlled, it would still be able to see all repositories that you as a user has access to.
+                </p>
+                <p>Go back to your GitHub repository and navigate to where you’ll be able to create a Personal Access Token.</p>
+                <table width="100%">
+                    <tbody>
+                        <tr>
+                            <td><img src="./img/3_3_3.png" class="sideImage_left_med" /></td>
+                            <td>
+                                <div class="step">Click on your GitHub Enterprise account picture in the top right. From the dropdown menu, click <b>Settings</b>.</div><br/><br/>
+                                <div class="step">In <b>Settings</b>, click on <b>Developer Settings</b> in the left side menu.</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="sectionTitle">3.3.4</div>
+
+                <div class="step">In <b>Developer Settings</b>, click on <b>Personal access tokens</b> on the left.</div><br/><br/>
+                <img class="standardImage" src="./img/3_3_4.png" /><br/><br/>
+                <div class="step">Then click on the <b>Generate new token</b> button near the top right.</div>
+
+                <div class="sectionTitle">3.3.5</div>
+
+                <p>Type in the name of your <b>Personal access token</b>. For this lab, use <span class="magenta">walkthrough-RH-OpenShift</span> for the name. A descriptive name was used to detail what this token is being used for. This descriptive name will help you distinguish how this token was used in the future when you revisit the Personal Access Token page.</p>
+                <p>Next, you’ll select what the <span class="magenta">scope of access</span> this personal access token will have. As mentioned above in the “house keys” analogy, these permissions have <b>fine control access</b> that are given through the token. Scopes for these tokens are <span class="magenta">powerful</span>, so it’s important to confirm how you provision permissions for your GitHub repository. Visit <a href="https://developer.github.com/enterprise/2.19/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/" target="_blank">https://developer.github.com/enterprise/2.19/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/</a> to learn more about scopes for OAuth Apps in GitHub.</p>
+                <p>You only need to provide repo scope access for OpenShift to read the Dockerfile and its contents.</p>
+                <div class="step">Add “<span class="magenta">walkthrough-RH-OpenShift</span>” as the <b>Note</b> value. Select the <span class="magenta">repo</span> option as the scope, which includes all subsets of the repo scope.</div><br/><br/>
+                <div class="question">
+                    💡 Why do we give OpenShift <b>full repo access</b>? <span class="readmore">[Click to Read More]</span>
+                </div>
+                <div class="answer">
+                    At this point in time, GitHub doesn't provide a way of setting the scope of a personal access token such that it has read-only access to repositories. Instead, one has to enable the repo scope which gives full control of private repositories. However, you will  notice that there are many other scope permissions that we do not need to grant.
+                </div>  <br />
+                <img class="standardImage" src="./img/3_3_5_A.png" /> <br /><br />
+                <div class="step">Once you're ready, click the <b>Generate</b> token at the bottom of the page.</div> <br /><br />
+                <img src="./img/3_3_5_B.png" /> <br /><br />
+                <div class="step UPDATE">Click the <span class="magenta">copy to clipboard icon &nbsp;<svg class="octicon octicon-clippy" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M2 13h4v1H2v-1zm5-6H2v1h5V7zm2 3V8l-3 3 3 3v-2h5v-2H9zM4.5 9H2v1h2.5V9zM2 12h2.5v-1H2v1zm9 1h1v2c-.02.28-.11.52-.3.7-.19.18-.42.28-.7.3H1c-.55 0-1-.45-1-1V4c0-.55.45-1 1-1h3c0-1.11.89-2 2-2 1.11 0 2 .89 2 2h3c.55 0 1 .45 1 1v5h-1V6H1v9h10v-2zM2 5h8c0-.55-.45-1-1-1H8c-.55 0-1-.45-1-1s-.45-1-1-1-1 .45-1 1-.45 1-1 1H3c-.55 0-1 .45-1 1z"></path></svg></span> to <b>save</b> the <b>new personal access token</b> to your computer for safekeeping. <span class="magenta">You will NOT be able to view it again.</span></div><br/><br/>
+
+                <div class="sectionTitle">3.3.6</div>
+
+                <table width="100%">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>Now with your new Personal Access Token, you can move back to the OpenShift Web Console tab to finish the Create Source Secret pop-up form.</p>
+                                <div class="step"><span class="magenta">Switch back</span> to the tab with your <b>OpenShift web console</b>.</div> <br/><br/>
+                                <div class="step"><span class="magenta">Paste</span> the <b>Personal Access Token</b> into the <b>Password</b> or token space as shown below. Then click <span class="magenta">Create</span>.</div>
+                            </td>
+                            <td><img class="sideImage_right_tb" src="./img/3_3_6_A.png" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="sectionTitle">3.3.7</div>
+
+                <p>Once you've hit Create, finish the overall application from Dockerfile. For the remaining fields, <span class="magenta">default values should be appropriate as-is</span>, which can be reviewed/validated in the screenshot (Resources: <b>Deployment</b>, Advanced Options: <b>Create a route to the application</b>). When you are finished confirming your selections, click <span class="magenta">Create</span>.
+
+                <img class="standardImage" src="./img/3_3_7.png" /> <br /><br />
+                <p>When you click create, OpenShift is taking the Dockerfile from your GitHub repository and using its instructions to build the application image from the current repository code.  A new topology instance will appear based on this process.</p>
+                <img src="./img/3_3_6_B.png" /> <br /><br />
+
+            </div>
+    
+            <!-- Finish Step 3 -->
+            <div id="sec_finishStep3">
+            <h2>
+            <a name="finishStep3">Finish Step 3</a>
+            </h2>
+            <div class="sectionTitle">You completed Step 3! 🎉</div>
+            <p>
+                You successfully added an application to OpenShift from a Dockerfile which included configuration such as generating personal access tokens from GitHub.
+            </p>
+            <div class="rect magentaRect single">
+            <div class="in">
+            Step 3 <b>Completed</b><br /><br />
+            <div class="list">
+                ✅ Add an application to OpenShift <br/>
+                ✅ Link OpenShift to GitHub repository <br/>
+                ✅ Generate token and create application <br/>        
+            </div>
+            </div>
+        </div>
+            <p>
+                In the next step, you will finally get to see the aftermath of the actions you took in this step by checking the status and getting to see your changes in the application from Step 1.
+            </p>
+            <div class="timeline">
+            <table>
+                <tbody>
+                <tr>
+                <td class="step completed">
+                <div class="title">Step 1 <b>Completed ✅</b></div><br />
+                ☑ Access GitHub Enterprise <br />
+                ☑ Review the drone application repository <br />
+                ☑ Make a configuration change <br />
+                ☑ Commit change to the master branch <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 2 <b>Completed ✅</b></div><br />
+                ☑ Access IBM Cloud<br />
+                ☑ Access RedHat OpenShift cluster <br />
+                ☑ Open RedHat OpenShift web console <br />
+                ☑ Explore OpenShift web console <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 3 <b>Completed ✅</b></div><br />
+                ☑ Add an application to OpenShift <br />
+                ☑ Link OpenShift to GitHub repository <br />
+                ☑ Generate token and create application <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step next">
+                <div class="title">Step 4 <b>Next</b></div><br />
+                ☑ Explore topology<br />
+                ☑ Check build status<br />
+                ☑ Access deployed application<br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step">
+                <div class="title">Step 5</div><br/>
+                ☑ Explore user interface<br />
+                ☑ Consider industry use cases<br />
+                </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="nextStepBar" onClick="moveTo('s4')">
+            Ready? Move on to Step 4 →
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+   <!--- Begin Step 4 -->
+    <div id="step4" class="main">
+        <div id="menu">
+            <a href="#step4" class="start">Step 4</a>
+            <a href="#4_1">4.1 Explore topology </a>
+            <a href="#4_2">4.2 Check build status</a>
+            <a href="#4_3">4.3 Access deployed application</a>
+            <a href="#finishStep4" class="end">Finish Step 4</a>
+        </div>
+        <div id="content">
+            <div id="main">
+            
+            <div id="sec_step4">
+            <h1>
+            <a name="step4">Step 4: Building and Verifying Application on OpenShift</a>
+            </h1>
+            <p>In this section, you will explore what became of the application you added in the previous step and explore the post build process for your application.</p>
+            <p>A <span class="darkblue">build</span> is the process of <b>transforming input parameters</b> into a <b>resulting object</b>. In this case, the process is used to transform input parameters of source code into a <b>runnable image</b>. The OpenShift Container Platform build system provides extensible support for build strategies that are based on selectable types specified in the build API. There are <span class="darkblue">three primary build strategies available</span>:</p>
+            <ol>
+                <li>Docker build</li>
+                <li>Source-to-Image (S2I) build</li>
+                <li>Custom build</li>
+            </ol> 
+            <p>In previous steps, we used the strategy involving a <span class="darkblue">Docker build</span> <span class="tdarkblue">using a Dockerfile</span>. The Docker build strategy invokes the docker build command and it expects a repository with a Dockerfile and all required artifacts in it to produce the runnable image.</p>
+            <p>You will soon monitor the build status and build finish, and finally access the instantiated application.</p>
+            
+            <div class="whole">
+                <div class="rect blueRect">
+                    <div class="in">
+                    Technologies Used
+                    <br />
+                    <img src="./img/openshift.png" />
+                    </div>
+                </div>
+        
+                <div class="rect magentaRect">
+                    <div class="in">
+                        Your Tasks for Step 4 <br /><br />
+                        <div class="list">
+                        ✅ Explore topology <br/>
+                        ✅ Check build status <br/>
+                        ✅ Access deployed application <br/>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="timeline">
+            <table>
+                <tbody>
+                <tr>
+                <td class="step completed">
+                <div class="title">Step 1 <b>Completed ✅</b></div><br />
+                ☑ Access GitHub Enterprise <br />
+                ☑ Review the drone application repository <br />
+                ☑ Make a configuration change <br />
+                ☑ Commit change to the master branch <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 2 <b>Completed ✅</b></div><br />
+                ☑ Access IBM Cloud<br />
+                ☑ Access RedHat OpenShift cluster <br />
+                ☑ Open RedHat OpenShift web console <br />
+                ☑ Explore OpenShift web console <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 3 <b>Completed ✅</b></div><br />
+                ☑ Add an application to OpenShift <br />
+                ☑ Link OpenShift to GitHub repository <br />
+                ☑ Generate token and create application <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step inprogress">
+                <div class="title">Step 4 <b>In Progress</b></div><br />
+                ☑ Explore topology<br />
+                ☑ Check build status<br />
+                ☑ Access deployed application<br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step">
+                <div class="title">Step 5</div><br/>
+                ☑ Explore user interface<br />
+                ☑ Consider industry use cases<br />
+                </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            <br />
+            </div>
+    
+            <!-- 4.1 -->
+            <div id="sec_4_1">
+                <h2>
+                <a name="4_1">4.1 Explore topology </a>
+                </h2>
+        
+                <div class="sectionTitle">4.1.1</div>
+
+                <p>In this step, you will explore the <span class="darkblue">Topology View</span> as your application is <b>building</b>. After you clicked <b>Create</b> at the <b>end of Step 3</b>, the application should have kicked off into the <b>building phase</b> and redirected you to the <b>Topology page</b> as shown below.</p>
+                <table width="100%">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>The Topology view in the Developer perspective of the web console provides a <b>visual representation</b> of all the applications <b>within a project</b>, including their build status and the components and services associated with them.</p>
+                                <p class="UPDATE2">This is just a reference for now, since you'll explore these features later. After you create an application, you are directed automatically to the Topology view where (eventually) you can:</p>
+                                <ol>
+                                    <li>See the status of the application <b>pods</b></li>
+                                    <li><b>Quickly</b> access the application on a public URL <span class="UPDATE2"><i>(Note that this only works after the build is complete)</i></span></li>
+                                    <li>Access the source code to modify it</li>
+                                    <li>See the status of your last build</li>
+                                    <li>Zoom in and out to see more details</li>
+                                </ol>
+                                <p>The application will be in the build stage for a <b>few minutes</b>. In the meantime, you will explore the build status.</p>
+                            </td>
+                            <td><img src="./img/4_1_1.png" class="sideImage_right_big" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="question">
+                    💡 Why does the application take <b>so long</b> in the <b>build stage</b>? <span class="readmore">[Click to Read More]</span>
+                </div>
+                <div class="answer">The application will be in the build stage for a <b>few minutes</b>. <br/><br/>OpenShift is taking the contents of the GitHub repository and building them according to the parameters on the Dockerfile. This is indicated by the loading icon on the bottom left side of the node.
+                </div><br/><br/>
+
+                <div class="sectionTitle">4.1.2</div>
+
+                <p>Let's explore the <b>build status</b> and logs of the build. The <b>new</b> node, <span class="magenta"><span class="labnameHere UPDATE">YourLabName</span></span><span class="blue">-2020-lab1</span>, which is most likely on the left, is what you will be <b>interacting</b> with. </p>
+                <div class="step">Click on the <span class="magenta">center of the new node</span> to bring up a <b>side menu</b>.</div> <br/>
+                <p class="UPDATE">You may notice <b>"ErrImagePull"</b> besides your pod at the top of the side menu. This error does <b>NOT</b> mean there's an error with your pod - in fact, you'll be able to read the logs of the build status to <b>review</b> the status of the build.</p>
+                <img class="standardImage" src="./img/4_1_2.png" /> <br /><br />
+                <p>This side menu in the Topology view provides the <b>details of the deployed components</b> in the Overview panel. You can use the <span class="magenta">Overview</span> and <span class="magenta">Resources</span> tabs to scale the application pods, check build status, services, and routes as follows.</p>
+                <p><i>You can use the <span class="magenta">Overview</span> tab to:</i></p>
+                <ul>
+                    <li>Scale your Pods using the up and down arrows to increase or decrease the number of instances of the application manually.</li>
+                    <li>Check the Labels, Annotations, and Status of the application.</li>
+                    <li>For serverless applications, the Pods are automatically scaled down to zero when idle and scaled up depending on the channel traffic.</li>
+                </ul>
+                <p><i>You can click the <span class="magenta">Resources</span> tab to:</i></p>
+                <ul>
+                    <li>See the list of all the Pods, view their status, access logs, and click on the Pod to see the Pod details.</li>
+                    <li>See the builds, their status, access logs, and start a new build if needed.</li>
+                    <li>See the services and routes used by the component.</li>
+                    <li>For serverless applications, the Resources tab provides information on the revision, routes, and the configurations used for that component.</li>
+                </ul>
+
+            </div>
+    
+            <!-- 4.2 -->
+            <div id="sec_4_2">
+            <h2>
+            <a name="4_2">4.2 Check build status</a>
+            </h2>
+
+            <div class="sectionTitle">4.2.1</div>
+
+            <p>Now you will <b>drill down</b> into the <b>log stream</b> of your building application. These log files will show you information about the <b>status</b> of <b>build phase</b> of your application. Since the build has just started, the logs can show whether the GitHub authentication with the Personal Access Token was <span class="magenta">successful</span> in linking the GitHub repository to OpenShift.</p>
+            <p>Log files are important because they keep track of events in your application from creation, modification, and deletion. Look for a prompt that refers to a <span class="magenta">successful authentication</span> using your <b>username</b> and <b>Personal Access Token</b>.</p>
+            <p>In the side menu under Builds, take a look at <b>View logs</b> in order to view the status of the deployment as shown below.</p> 
+            <div class="important UPDATE">
+                Be sure to click <b>View Logs</b> <span class="UPDATE2">beside</span> where it says <b>Build #1 is running</b>.</div>
+            <img class="standardImage" src="./img/4_2_1.png" /> <br /><br />
+            
+            <div class="sectionTitle">4.2.2</div>
+
+            <p>You will be redirected to the <b>Build details</b> page where you should see a <b>Log stream</b> as shown below. This Log stream shows the build log in <b>real time</b>. For this lab, you are looking for <span class="blue">Cloning "https://github.ibm.com/GSC-2020-lab-1/</span><span class="magenta"><span class="labnameHere UPDATE">YourLabName</span></span><span class="blue">-2020-lab.git"</span>, which is an indicator that your Personal Access Token was step up <span class="magenta">correctly</span> in Step 3 and that your GitHub repository is successfully being cloned to the RedHat OpenShift instance.</p>
+            <p>If you do not see this log, <span class="UPDATE2"><b>scroll up or down</b> in the log file to</span> check carefully once more through the log stream <span class="UPDATE2">(it may be at the top or bottom of the log)</span>. If you still do not see it, you may need to go back to Step 3 and set up your Personal Access Token correctly.</p>
+            <img class="standardImage" src="./img/4_2_2_A.png" /> <br /><br />    
+            <p>On a successful build, you should see a log <b>similar</b> to this at the end: <span class="tblue">Successfully pushed image-registry.openshift-image-registry.svc:5000/<span class="UPDATE">...</span> Push successful".</span></p>
+            
+            <p><b>Keep in mind, you may not see this final log message for an upwards of over 5 minutes. Please be patient.</b></p>
+            <img class="standardImage" src="./img/4_2_2_B.png" /> <br /><br />  
+            
+            </div>
+    
+            <!-- 4.3 -->
+            <div id="sec_4_3">
+            <h2>
+            <a name="4_3">4.3 Access deployed application</a>
+            </h2>
+
+            <div class="sectionTitle">4.3.1</div>
+
+
+
+            <p>Now you can check the status of your built application and navigate to your finished application.</p>
+
+            <div class="step">Click on <b>Topology</b> on the left side menu.</div>
+             
+             <p>The deployment of your application is finished when the <span class="green">green checkmark</span> appears on the deployment node as shown below.</p>
+            <p>In this Topology View, <b>many visual indicators</b> can show you more information about your deployment.</p>
+            <img class="standardImage" src="./img/4_3_1_A.png" /> <br /><br />
+            <img class="standardImage" src="./img/4_3_1_B.png" /> <br /><br />
+            <div class="step">Click the top right of the new node <span class="magenta"><span class="labnameHere UPDATE">YourLabName</span></span><span class="blue">-2020-lab1</span> to Open URL (should open in a <b>New Tab</b>).</div><br/><br/>
+
+            <div class="sectionTitle UPDATE">4.3.2</div><br/><br/>
+
+                <div class="problem question">
+                ⚠️ My dashboard has <span class="red">errors</span> / I see this error: "<b>There was some issue with the values in config.json...</b>". <span class="readmore">[Click to Troubleshoot]</span>
+            </div>
+            <div class="answer">
+                <p>If in Step 1.3.1, you incorrectly customized your application with a newer set of values, the application may display errors such as "<b>friendly name missing</b>" or "<b>drone serial number missing</b>", along with a pop-up message that reads "<b>There was some issue with the values in config.json...</b>" as show below. You will need to <span class="magenta">correct the values in the config.json</span>.</p>
+                <img class="standardImage" src="./img/4_3_2_error_A.png" /> <br /><br />
+                <img class="standardImage" src="./img/4_3_2_error_B.png" /> <br /><br />
+                <p>Go back to your <b>GitHub tab </b>and edit the code in the <b>config.json file</b>, your application’s configuration file which adds customization to your application’s user interface (like in in <b>Step 1.3.1</b>).</p>
+                <div class="step">Once back in the GitHub tab, navigate back to your config.json and Click on the Edit button on the right side as shown.</div>
+                <img class="standardImage" src="./img/1_3_1.png" /><br/><br/>
+                <p>For convenience, copy the highlighted block of code below and then replace the content in your config.json to avoid errors that may have been introduced when you initially edited the code:</p>
+                <div class="codeblock">
+                    <div class="text-wrap">
+                        public / <b>config.json</b><br/>
+                        <textarea id="textA" readonly>{
+    "ConsoleDisplayName": "Remote Operations Console - Corrected Config",
+    "UserDrones": [
+        {
+            "friendly_name": "Lab User Drone1",
+            "drone_serial_no": "Lab1_0001"
+        },
+        {
+            "friendly_name": "Lab User Drone2",
+            "drone_serial_no": "Lab1_0002"
+        },
+        {
+            "friendly_name": "Lab User Drone3",
+            "drone_serial_no": "Lab1_0003"
+        }
+    ],
+    "DroneOperations": [
+        "Rescue Coordination",
+        "Damage Inspection",
+        "Safety Analysis",
+        "Stormwater Operations Monitor",
+        "Geothermal Monitor"
+    ]
+}</textarea><br/>
+                        <div id="copyToClipboard-a" class="clipboardButton">Copy to clipboard</div>
+                        <div id="notif" class="notif"></div>
+                    </div>
+                </div>
+                <br/><br/>
+                <div class="step">Make sure <b>Commit the changes as described in Step 1.4</b>. Then click the <b>Commit changes</b> button.</div><br/><br/>
+                <p>To have the changes made in Step 4.4 <b>reflected</b> in the application, you will need to <span class="magenta">redeploy the application</span>. To do this, re-execute Step 4.1.2 and click the <b>Start Build</b> option.</p>
+                <img class="standardImage" src="./img/4_3_2_error_C.png" /><br/><br/>
+                <p>Now you can check the status of your built application and navigate to your finished application. The deployment of your application is finished when the green checkmark appears on the deployment node as shown below.</p>
+                <img class="standardImage" src="./img/4_3_1_B.png" /><br/><br/>
+            </div>
+
+            <p>You should see your <b>own</b> customized remote drone console application in a new tab in your browser as shown below.</p>
+            <img class="standardImage" src="./img/4_3_2.png" /> <br /><br />
+            <p>Notice the URL of this new tab, which is an endpoint that can be shared with others.</p>
+            <p>If you see this page, you have <b>successfully deployed your application</b>!</p>
+
+            </div>  
+
+            </div>
+    
+            <!-- Finish Step 4 -->
+            <div id="sec_finishStep4">
+            <h2>
+            <a name="finishStep4">Finish Step 4</a>
+            </h2>
+            <div class="sectionTitle">You completed Step 4! 🎉</div>
+            <p>
+            You successfully explored the topology view during and after the build process and checked the status to see your changes in the application. OpenShift took the Dockerfile from your GitHub repository and used its instructions to build the application image from the current repository code. You have utilized your skills to deploy an application on the latest multi-hybrid cloud platforms.
+            </p>
+            <div class="rect magentaRect single">
+            <div class="in">
+            Step 4 <b>Completed</b><br /><br />
+            <div class="list">
+                ✅ Explore topology <br/>
+                ✅ Check build status <br/>
+                ✅ Access deployed application <br/>   
+            </div>
+            </div>
+        </div>
+            <p>
+            In the next step, you will explore your new custom remote drone dashboard application, along with various industry uses cases to consider.
+            </p>
+            <div class="timeline">
+            <table>
+                <tbody>
+                <tr>
+                <td class="step completed">
+                <div class="title">Step 1 <b>Completed ✅</b></div><br />
+                ☑ Access GitHub Enterprise <br />
+                ☑ Review the drone application repository <br />
+                ☑ Make a configuration change <br />
+                ☑ Commit change to the master branch <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 2 <b>Completed ✅</b></div><br />
+                ☑ Access IBM Cloud<br />
+                ☑ Access RedHat OpenShift cluster <br />
+                ☑ Open RedHat OpenShift web console <br />
+                ☑ Explore OpenShift web console <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 3 <b>Completed ✅</b></div><br />
+                ☑ Add an application to OpenShift <br />
+                ☑ Link OpenShift to GitHub repository <br />
+                ☑ Generate token and create application <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 4 <b>Completed ✅</b></div><br />
+                ☑ Explore topology<br />
+                ☑ Check build status<br />
+                ☑ Access deployed application<br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step next">
+                <div class="title">Step 5 <b>Next</b></div><br/>
+                ☑ Explore user interface<br />
+                ☑ Consider industry use cases<br />
+                </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="nextStepBar" onClick="moveTo('s5')">
+            Ready? Move on to Step 5 →
+            </div>
+        </div>
+        </div>
+        </div>
+
+   <!--- Begin Step 5 -->
+    <div id="step5" class="main">
+        <div id="menu">
+            <a href="#step5" class="start">Step 5</a>
+            <a href="#5_1">5.1 Explore user interface</a>
+            <a href="#5_2">5.2 Consider industry use cases </a>
+            <a href="#finishStep5" class="end">Finish Step 5</a>
+        </div>
+        <div id="content">
+            <div id="main">
+            
+            <div id="sec_step5">
+            <h1>
+            <a name="step5">Step 5: Exploring the Application</a>
+            </h1>
+            <p>
+                In this section, you will explore your new custom remote drone dashboard application, along with various industry uses cases to consider.
+            </p>
+            
+            <div class="whole">
+                <div class="rect blueRect">
+                    <div class="in">
+                    Technologies Used
+                    <br />
+                    <img src="./img/iotdrones.png" class="sideTechnology"/>
+                    <img src="./img/github.png" />
+                    <img src="./img/openshift.png" />
+                    </div>
+                </div>
+        
+                <div class="rect magentaRect">
+                    <div class="in">
+                        Your Tasks for Step 5 <br /><br />
+                        <div class="list">
+                        ✅ Explore user interface <br/>
+                        ✅ Consider industry use cases <br/>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="timeline">
+            <table>
+                <tbody>
+                <tr>
+                <td class="step completed">
+                <div class="title">Step 1 <b>Completed ✅</b></div><br />
+                ☑ Access GitHub Enterprise <br />
+                ☑ Review the drone application repository <br />
+                ☑ Make a configuration change <br />
+                ☑ Commit change to the master branch <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 2 <b>Completed ✅</b></div><br />
+                ☑ Access IBM Cloud<br />
+                ☑ Access RedHat OpenShift cluster <br />
+                ☑ Open RedHat OpenShift web console <br />
+                ☑ Explore OpenShift web console <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 3 <b>Completed ✅</b></div><br />
+                ☑ Add an application to OpenShift <br />
+                ☑ Link OpenShift to GitHub repository <br />
+                ☑ Generate token and create application <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 4 <b>Completed ✅</b></div><br />
+                ☑ Explore topology<br />
+                ☑ Check build status<br />
+                ☑ Access deployed application<br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step inprogress">
+                <div class="title">Step 5 <b>In Progress</b></div><br/>
+                ☑ Explore user interface<br />
+                ☑ Consider industry use cases<br />
+                </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            <br />
+            </div>
+    
+            <!-- 5.1 -->
+            <div id="sec_5_1">
+            <h2>
+            <a name="5_1">5.1 Explore user interface</a>
+            </h2>
+    
+            <div class="sectionTitle">5.1.1</div>
+            <p>If you haven’t done so already, click on the Open URL button on the top right of your new containerized application deployed on Red Hat OpenShift running in IBM Cloud. Your remote drone console application may need a <b>few seconds</b> to load, but should reflect the application you just deployed. At the top, you should be able see that change in the title – ConsoleDisplayName was changed to the <b>value you entered</b> in the <b>config.json</b> during <b>Step 1</b> of the lab instructions. Your title will have been <span class="magenta">unique</span> to you.</p>
+            <div class="step"><b>Hover</b> over the dashboard to see sections outlined that can be clicked on to reveal more information. <b>Click on each section - <span class="magenta">there are 6 total</span>.</b></div> <br/><br/>
+
+            <table width="100%" class="dashboardTable">
+                <tbody>
+                    <tr>
+                        <td colspan="3">
+                            <a target="popup" onclick="window.open('./db_top.html','name','width=600,height=300')">
+                                <img src="./img/tb_1.png" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a target="popup" onclick="window.open('./db_map.html','name','width=600,height=700')">
+                                <img src="./img/tb_2A.png" />
+                            </a>
+                        </td>
+                        <td>
+                            <a target="popup" onclick="window.open('./db_drones.html','name','width=400,height=700')">
+                                <img src="./img/tb_2B.png" />
+                            </a>
+                        </td>
+                        <td>
+                            <a target="popup" onclick="window.open('./db_info.html','name','width=400,height=700')">
+                                <img src="./img/tb_2C.png" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <a target="popup" onclick="window.open('./db_analytics.html','name','width=600,height=700')">
+                                <img src="./img/tb_3.png" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <a target="popup" onclick="window.open('./db_operations.html','name','width=800,height=700')">
+                                <img src="./img/tb_4.png" />
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            
+            </div>
+    
+            <!-- 5.2 -->
+            <div id="sec_5_2">
+            <h2>
+            <a name="5_2">5.2 Consider industry use cases </a>
+            </h2>
+            <div class="sectionTitle">5.2.1</div>
+            <p>Drone technology has massive overlaps in key technology advancements in the recent years. Drones are major talking points in Internet of Things (IoT), edge computing, visual analytics and more. In addition to being pivotal instruments in these technologies, drones have a multitude of use cases.</p>
+            <p>This subset of a table published by the <i>IDC's Worldwide Robotics and Drones Spending Guide Taxonomy, 2020</i> report describes Public Market Use Cases and many <b>Additional Operations</b> described in this lab.</p>
+            <table width="100%" class="grayTable">
+                <tbody>
+                    <tr>
+                    <td class="header">Industry</td>
+                    <td class="header">Operation</td>
+                    <td class="header">Definition</td>
+                    </tr>
+                    <tr>
+                        <td>Education</td>
+                        <td>Educational Assistance</td>
+                        <td>Drones can provide assistance to university/college/school laboratory and that are used as early education devices</td>
+                    </tr>
+                    <tr>
+                        <td>Healthcare Provider</td>
+                        <td>Emergency Service</td>
+                        <td>Drones that deliver first-aid kit and essential equipment to the scene of a medical emergency</td>
+                    </tr>
+                    <tr>
+                        <td>Government or Insurance</td>
+                        <td>Damage Assessment</td>
+                        <td>Drones that conduct aerial survey of a site to evaluate damage after a disaster. This can be for insurance purposes in the case of property damage or in public safety to e to identify areas that are unsafe to travel or where rescue services are needed.</td>
+                    </tr>
+                    <tr>
+                        <td>Insurance</td>
+                        <td>Risk/Value Assessment</td>
+                        <td>Drones that conduct aerial survey of a site for property underwriting where they could provide high-resolution imagery of the exterior condition of a property.</td>
+                    </tr>
+                    <tr>
+                        <td>Government</td>
+                        <td>Situational Awareness</td>
+                        <td>Drones used for to assess a situation and provide tooling to visualize a situation from a safe and remote location and coordinate with first responders.</td>
+                    </tr>
+                    <tr>
+                        <td>Government</td>
+                        <td>Risk evaluation</td>
+                        <td>Drones used for bridge and pier inspections, fire scenes, emergency medical services, and natural disaster events, accident reconstruction.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/><br/>
+
+            <p>Among possible uses for drones equipped with visual recognition and/or thermal imaging:</p>
+            <ul>
+                <li>Firefighters can attach thermal imaging cameras to a drone and immediately see where the hotspots are in a forest fire.</li>
+                <li>Search and rescue teams can use them to look for people using object recognition or heat signatures</li>
+                <li>Farmers can use them to determine the health of crops and make decisions affecting crop yield.</li>
+                <li>Surveyors can create a 3D visualization of a construction site as the structure is being built.</li>
+            </ul>
+            <p>These are just a handful of use cases that drone technology, edge computing and cognitive analysis are used for. These use cases are focused on the Public Market and can be expanded to many other industries.</p>
+
+            </div>
+    
+            <!-- Finish Step 5 -->
+            <div id="sec_finishStep5">
+            <h2>
+            <a name="finishStep5">Finish Step 5</a>
+            </h2>
+            <div class="sectionTitle">You completed Step 5! 🎉</div>
+            <p>
+            You reviewed the remote drone dashboard application’s user interface you customized in Step 1 and had deployed in the steps afterward. While this step mentioned some industry use cases, there are certainly many more to consider with the technologies detailed in this lab.
+            </p>
+            <div class="rect magentaRect single">
+            <div class="in">
+            Step 5 <b>Completed</b><br /><br />
+            <div class="list">
+                ✅ Explore user interface <br/>
+                ✅ Consider industry use cases <br/>  
+            </div>
+            </div>
+        </div>
+            <p>
+            Now that you have successfully completed all steps in the lab, move onto the final summary for closing thoughts.
+            </p>
+            <div class="finalStep">
+                <span class="yel">Post a screenshot</span><br/> of your custom remote drone console application<br/>
+in the Slack channel <a href="https://ibm.enterprise.slack.com/?redir=%2Fr-t75413889568%3Fredir%3D%252Fgantry%252Fauth%253Fapp%253Dclient%2526lc%253D1592853172%2526return_to%253D%25252Fclient%25252FT27C5S5GQ%25252FC015DBZ9YH0%2526teams%253D#/" target="_blank">#2020gsc_ibmcloudsandbox_dronelab1</a><br/> (Link also in the top right of this page)</div><br/><br/>
+            <div class="timeline">
+            <table>
+                <tbody>
+                <tr>
+                <td class="step completed">
+                <div class="title">Step 1 <b>Completed ✅</b></div><br />
+                ☑ Access GitHub Enterprise <br />
+                ☑ Review the drone application repository <br />
+                ☑ Make a configuration change <br />
+                ☑ Commit change to the master branch <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 2 <b>Completed ✅</b></div><br />
+                ☑ Access IBM Cloud<br />
+                ☑ Access RedHat OpenShift cluster <br />
+                ☑ Open RedHat OpenShift web console <br />
+                ☑ Explore OpenShift web console <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 3 <b>Completed ✅</b></div><br />
+                ☑ Add an application to OpenShift <br />
+                ☑ Link OpenShift to GitHub repository <br />
+                ☑ Generate token and create application <br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 4 <b>Completed ✅</b></div><br />
+                ☑ Explore topology<br />
+                ☑ Check build status<br />
+                ☑ Access deployed application<br />
+                </td>
+                <td class="arrow">→</td>
+                <td class="step completed">
+                <div class="title">Step 5 <b>Completed ✅</b></div><br/>
+                ☑ Explore user interface<br />
+                ☑ Consider industry use cases<br />
+                </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="nextStepBar" onClick="moveTo('sum')">
+            Ready? Move on to Summary →
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+   <!--- Begin Summary -->
+   <div id="summary" class="main">
+        <h2>GSC Drone Lab 1: Summary</h2>
+        <div class="timeline">
+                <table>
+                    <tbody>
+                    <tr>
+                    <td class="step completed">
+                    <div class="title">Step 1 <b>Completed ✅</b></div><br />
+                    ☑ Access GitHub Enterprise <br />
+                    ☑ Review the drone application repository <br />
+                    ☑ Make a configuration change <br />
+                    ☑ Commit change to the master branch <br />
+                    </td>
+                    <td class="arrow">→</td>
+                    <td class="step completed">
+                    <div class="title">Step 2 <b>Completed ✅</b></div><br />
+                    ☑ Access IBM Cloud<br />
+                    ☑ Access RedHat OpenShift cluster <br />
+                    ☑ Open RedHat OpenShift web console <br />
+                    ☑ Explore OpenShift web console <br />
+                    </td>
+                    <td class="arrow">→</td>
+                    <td class="step completed">
+                    <div class="title">Step 3 <b>Completed ✅</b></div><br />
+                    ☑ Add an application to OpenShift <br />
+                    ☑ Link OpenShift to GitHub repository <br />
+                    ☑ Generate token and create application <br />
+                    </td>
+                    <td class="arrow">→</td>
+                    <td class="step completed">
+                    <div class="title">Step 4 <b>Completed ✅</b></div><br />
+                    ☑ Explore topology<br />
+                    ☑ Check build status<br />
+                    ☑ Access deployed application<br />
+                    </td>
+                    <td class="arrow">→</td>
+                    <td class="step completed">
+                    <div class="title">Step 5 <b>Completed ✅</b></div><br/>
+                    ☑ Explore user interface<br />
+                    ☑ Consider industry use cases<br />
+                    </td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div><br/><br/>
+        <div class="block UPDATE">
+            <div class="final_left">
+                <img class="sideImage" src="./img/diagram.png" />
+      <br />
+      <a href="./img/diagram.png" target="_blank">View full size diagram</a>
+
+            </div>
+            <div class="final_right">
+                <p><b>Let’s review what we accomplished in this lab overall:</b> </p>
+                
+                <p>First, we got some exposure to <b>GitHub</b>, got a peek under the covers of the code layout and configuration for a sample Remote Drone Console Application, and set up a <b>Personal access token</b> with repository access permissions.</p>  
+                
+                <p>Next, we got familiar with navigating within our IBM Cloud account dashboard, and more specifically within an organization workspace, cluster, and it’s associated  RedHat <b>OpenShift</b> console. Within the OpenShift console, we worked on a project within the Developer perspective and added a new <b>Topology</b> to create an application from our GitHub’s <b>Dockerfile</b>.</p>  
+                
+                <p>Then, we explored the <b>Resources</b> within the <b>OpenShift</b> project <b>Topology</b> to monitor the application build process and to find the path the Remote Drone Console Application after its <b>deployment</b>.</p>
+                
+                <p>Finally, we explored the Remote Drone Console Application, confirmed our custom <b>configuration</b>, and considered <b>industry</b> use cases.</p>
+                
+                <p>As a takeaway, hopefully you feel a little more comfortable with the relationship between <b>GitHub</b> and RedHat <b>OpenShift</b> on <b>IBM Cloud</b>, and gained a better understanding of the overall process to take an application from code/configuration all the way to through to its containerized cloud deployment!</p> </div>
+
+
+
+        </div>
+        <div class="mid"><hr/>
+            Thank you for taking time to complete <b>GSC Drone Lab 1</b>. <span class="blue">Did you enjoy this lab?</span> Please leave a comment in this lab’s <span class="purple">Slack channel</span> (link in the top right) and let us know!<br/><br/> <span class="UPDATE">If you found this lab to be useful, remember that this Lab is the <b>first</b> a series of <b>Hands-on Labs</b> that will be available in the <b><i>near future</i></b> that will expand on the scenario and functionality that you completed today.</span><br/><br/>
+            <table class="futureLabs">
+                <tbody>
+                    <tr class="header">
+                        <td>Lab Title</td>
+                        <td>Lab Description</td>
+                    </tr>
+                    <tr class="completed">
+                        <td>
+                            ✅ <b>Lab 1</b> Completed 
+                        </td>
+                        <td>
+                            Building the drone application on a Multi-Hybrid cloud platform and using all the associated coding tools
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Lab 2</b>
+                        </td>
+                        <td>
+                            Validate connectivity to resources in back-end private cloud, and test interaction with drone in remote private cloud location via app running in multi-hybrid cloud.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Lab 3</b>
+                        </td>
+                        <td>
+                            Apply visual recognition to detect/count vehicles and sensor API to monitor water/flooding in streams in order to reroute traffic and barricade unsafe conditions, in a specific geographic location.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mid">
+            The GSC Drone Lab 1 was created by the <b>IBM Global Solution Center Public Market</b> team in Dallas, TX.<br/>
+            Thank you to Romelia Flores, Catherine Chess and the SBaaS team, and Scott Knupp for their support on this lab.<br/><br/>
+            For more information on the <b>Global Solution Center</b>, what we do, and our pre-sales technical support for industry solutions, <br/>
+            visit <a href="https://ibm.biz/gscdallas" target="_blank">https://ibm.biz/gscdallas</a>.<br/> <br/> 
+        </div>
+   </div>
+       </div>
+   <!--- End Lab-->
+  </div>
+
+  <script src="./script.js"></script>
+ </body>
+</html>
